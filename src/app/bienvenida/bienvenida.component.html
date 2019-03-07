@@ -1,0 +1,74 @@
+
+<div class= "header">
+    <img src="assets/top.png" width="1014px"/>
+</div>
+<mat-card class="carta">
+       
+<div class="container">
+    <div *ngIf="!submitted" class="flex-container">
+            
+        <div class="left">            
+
+            <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
+                <div class="form-group">
+                    <label for="cargo">Cargo desempeñado</label>
+                    <span tooltip="Ingrese su cargo" placement="right" show-delay="100"><img
+                            src="assets/descripcion.png" /></span>
+                    <input type="text"  class="form-control" formControlName="cargo" />
+                    <!--<div class="alert alert-danger" [hidden]="heroForm.controls.apellido.valid">Apellido es requerido</div>-->
+                </div>
+                <div class="form-group">
+                    <label for="contrato">Clase de Contrato</label>
+                    <span tooltip="Seleccione el tipo de contrato" placement="right" show-delay="100"><img
+                            src="assets/descripcion.png" /></span>
+                            <select class="form-control" formControlName="contrato">
+                                <option *ngFor="let s of contrato" [value]="s">{{s}}</option>
+                            </select>
+                    <!--<div class="alert alert-danger" [hidden]="heroForm.controls.email.valid">No es un correo valido</div>-->
+                </div>
+                <div class="form-group">
+                    <label for="jornada">Jornada Laboral</label>
+                    <span tooltip="Seleccione su jornada laboral" placement="right" show-delay="100"><img
+                            src="assets/descripcion.png" /></span>
+                            <input type="number" class="form-control" formControlName="jornada" />
+                    <!--<div class="alert alert-danger" [hidden]="heroForm.controls.email.valid">No es un correo valido</div>-->
+                </div>
+                <div class="form-group">
+                    <label for="tiempo">Tiempo Laborado</label>
+                    <span tooltip="Ingrese el tiempo laborado en dias" placement="right" show-delay="100"><img src="assets/descripcion.png" /></span>
+                    <input type="number" class="form-control" formControlName="tiempo" />
+                    <!-- <div class="alert alert-danger" [hidden]="heroForm.controls.lista.valid">Power is required</div>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="termina">Modo de Terminación</label>
+                    <span tooltip="Ingrese el modo de terminación del contrato laboral" placement="right" show-delay="100"><img src="assets/descripcion.png" /></span>
+                    <select class="form-control" formControlName="termina">
+                        <option *ngFor="let s of termina" [value]="s">{{s}}</option>
+                    </select>
+                    <!-- <div class="alert alert-danger" [hidden]="heroForm.controls.lista.valid">Power is required</div>-->
+                </div>
+
+                <button type="submit" class="btn btn-default" [disabled]="!baseForm.valid">Siguiente</button>
+            </form>
+        </div>
+
+        <div class="right">
+            
+            
+            <p>Bienvenido a <b>LiquiTadeo</b> el consultorio jurídico de la Universidad Jorge Tadeo Lozano pone a disposición esta herramienta que permitirá  generar su liquidación laboral.</p> 
+
+               <p><b>Recuerde:</b> cuando exista conflicto respecto de los derechos del trabajador, deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p> 
+            <div>
+                <h2 class = "resultado_text">{{resultado_text}}</h2>
+                <p class = "resultado_text">{{resultado2_text}}</p>
+                <p class = "resultado_text">{{resultado3_text}}</p>
+                <p class = "resultado">{{resultado}}</p>
+            <button  (click)="continuar()" class="btn btn-primary" *ngIf="condition" >Realizar Test</button>
+            </div>
+
+        </div> 
+    
+    </div>
+</div>
+</mat-card>
