@@ -34,7 +34,6 @@ export class BasePromedioComponent implements OnInit {
   }
   createMyForm() {
     return this.formBuilder.group({
-      date: ['', Validators.compose([Validators.required])],
       fecha_ini: ['', Validators.compose([Validators.required])],
       fecha_fin: ['', Validators.compose([Validators.required])],
       salario: ['', Validators.compose([Validators.required])],
