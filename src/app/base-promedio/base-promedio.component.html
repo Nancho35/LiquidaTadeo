@@ -1,37 +1,105 @@
-<div class="container">
-    <div *ngIf="!submitted" class="flex-container">
-            
+<div class="header">
+        <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" /></a> 
+</div>
+<mat-card class="carta">
+    <div class="container">
+        <div *ngIf="!submitted" class="flex-container">
 
-        <div>
-            <h1>Liquidación de Contrato Laboral </h1>
-            <h2>Base Promedio</h2>
-            
-            <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
-              
-             
-                
-                <button type="submit" class="btn btn-default" [disabled]="!baseForm.valid">Siguiente</button>
-            </form>
-        </div>
-  
-        <div>
-            <img src="assets/banner.jpg" style="margin-top:3%;width: 570px;height: 200px;padding-bottom: 2%;"/>
-            
-            <p>Bienvenido a <b>LiquiTadeo</b> el consultorio jurídico de la Universidad Jorge Tadeo Lozano  
-            <p> pone a disposición esta herramienta que permitirá  generar su liquidación laboral.</p> 
-  
-               <p><b>Recuerde:</b> cuando exista conflicto respecto de los derechos del trabajador, </p>
-               <p>deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p> 
-            <div>
-                <h2 class = "resultado_text">{{resultado_text}}</h2>
-                <p class = "resultado_text">{{resultado2_text}}</p>
-                <p class = "resultado_text">{{resultado3_text}}</p>
-                <p class = "resultado">{{resultado}}</p>
-            <button  (click)="continuar()" class="btn btn-primary" *ngIf="condition" >Realizar Test</button>
+
+            <div class="left">
+
+                <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
+                    <div class="form-group">
+                        <label>Fecha de inicio</label>
+                        <span tooltip="Ingrese la fecha inicial del contrato" placement="right" show-delay="100"><img
+                                src="assets/descripcion.png" /></span>
+                        <input formControlName="fecha_ini" matInput [matDatepicker]="fecha_ini"
+                            placeholder="Escoge una fecha">
+                        <mat-datepicker-toggle matSuffix [for]="fecha_ini"></mat-datepicker-toggle>
+                        <mat-datepicker #fecha_ini></mat-datepicker>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de fin</label>
+                        <span tooltip="Ingrese la fecha final del contrato" placement="right" show-delay="100"><img
+                                src="assets/descripcion.png" /></span>
+                        <input formControlName="fecha_fin" matInput [matDatepicker]="fecha_fin"
+                            placeholder="Escoge una fecha">
+                        <mat-datepicker-toggle matSuffix [for]="fecha_fin"></mat-datepicker-toggle>
+                        <mat-datepicker #fecha_fin></mat-datepicker>
+                    </div>
+                    <div class="form-group">
+                        <label for="salario">Salario básico</label>
+                        <span tooltip="Ingrese su salario" placement="right" show-delay="100"><img
+                                src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="salario" />
+                    </div>
+                    <div class="form-group">
+                        <label for="auxilio">Auxilio de transporte</label>
+                        <span tooltip="Ingrese el valor del auxilio de transporte" placement="right"
+                            show-delay="100"><img src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="auxilio" />
+                    </div>
+                    <div class="form-group">
+                        <label for="horas_ex_diur">Horas extras diurnas</label>
+                        <span tooltip="Ingrese el valor de las horas extras diurnas" placement="right"
+                            show-delay="100"><img src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="horas_ex_diur" />
+                    </div>
+                    <div class="form-group">
+                        <label for="horas_ex_domin">Horas extras nocturnas</label>
+                        <span tooltip="Ingrese el valor de las horas extras dominicales" placement="right"
+                            show-delay="100"><img src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="horas_ex_domin" />
+                    </div>
+                    <div class="form-group">
+                        <label for="recargos_noc">Recargos nocturnos</label>
+                        <span tooltip="Ingrese el valor de los recargos nocturnos" placement="right"
+                            show-delay="100"><img src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="recargos_noc" />
+                    </div>
+                    <div class="form-group">
+                        <label for="domi_ordinarios">Dominicales ordinarios</label>
+                        <span tooltip="Ingrese el valor de dominicales ordianrios" placement="right"
+                            show-delay="100"><img src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="domi_ordinarios" />
+                    </div>
+                    <div class="form-group">
+                        <label for="otros">Otros valores</label>
+                        <span tooltip="Ingrese otros valores" placement="right" show-delay="100"><img
+                                src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="otros" />
+                    </div>
+                    <div class="form-group">
+                        <label for="concepto_otros">Concepto del valor</label>
+                        <span tooltip="Ingrese concepto correspondiente a lo ingresado en el campo 'Otros valores'" placement="right" show-delay="100"><img
+                                src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="concepto_otros" />
+                    </div>
+
+
+                    <button type="submit" class="btn btn-default" [disabled]="!baseForm.valid">Siguiente</button>
+                </form>
             </div>
-  
-        </div> 
-  
+
+            <div class="right">
+
+
+                <p>Bienvenido a <b>LiquiTadeo</b> el consultorio jurídico de la Universidad Jorge Tadeo Lozano
+                    <p> pone a disposición esta herramienta que permitirá generar su liquidación laboral.</p>
+
+                    <p><b>Recuerde:</b> cuando exista conflicto respecto de los derechos del trabajador, </p>
+                    <p>deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p>
+                    <div>
+                        <h2 class="resultado_text">{{resultado_text}}</h2>
+                        <p class="resultado_text">{{resultado2_text}}</p>
+                        <p class="resultado_text">{{resultado3_text}}</p>
+                        <p class="resultado">{{resultado}}</p>
+                        <button (click)="continuar()" class="btn btn-primary" *ngIf="condition">Realizar Test</button>
+                    </div>
+
+            </div>
+
+        </div>
+
     </div>
-  
-  </div>
+</mat-card>

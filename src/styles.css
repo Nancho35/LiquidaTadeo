@@ -1,1 +1,6 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.header{
+    margin-top: 2%;    
+    margin-left: 10%;
+    margin-bottom: 20px;
+}

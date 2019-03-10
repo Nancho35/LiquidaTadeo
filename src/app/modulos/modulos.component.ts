@@ -41,7 +41,7 @@ export class ModulosComponent implements OnInit {
     this.submittedModel = value;
     this.data.modulos = this.submittedModel;
     this.router.navigate(['base']);
-    console.log(this.data.modulos)
+
   }
 
 }

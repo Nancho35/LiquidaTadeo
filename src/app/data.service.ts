@@ -11,8 +11,6 @@ import { Base } from './shared/base';
 export class DataService {
   public bienvenida: Bienvenida;
   public modulos: Modulos;
-  public metabolico: Metabolico;
-  public somatotipo: Somatotipo;
   public base: Base;
   constructor() { }
 }

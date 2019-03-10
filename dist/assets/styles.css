@@ -43,9 +43,31 @@ input.ng-valid, select.ng-valid {
   border-left: 5px solid #42A948;
 }
 .flex-container {
-  display: block;
+  clear:both;
 }
 
+.left{
+	width: 45%;
+	margin-left: 5%;
+	float: left;
+}
+.right{
+	width: 50%;
+	height: 20%;;
+	float: right;
+	padding-right: 10%;
+	padding-top: 8%;
+}
+
+
+.footer_{
+	margin-bottom: 2%;
+}
+
+.carta{
+	max-width: 80%;
+	margin-left: 6%;
+}
 span{
 
 	margin-left: 2%;

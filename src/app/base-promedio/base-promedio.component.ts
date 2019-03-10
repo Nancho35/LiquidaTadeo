@@ -34,19 +34,26 @@ export class BasePromedioComponent implements OnInit {
   }
   createMyForm() {
     return this.formBuilder.group({
-      cargo: ['', Validators.compose([Validators.pattern('^[aA-zZ áéíóúÁÉÍÓÚñÑ]{2,35}$'), Validators.required])],
-      contrato: ['', Validators.compose([Validators.required])],
-      jornada: ['', Validators.compose([Validators.required])],
-      tiempo: ['', Validators.compose([Validators.pattern('^[0-9]{2}$'), Validators.required])],
-      termina: ['', Validators.compose([Validators.required])]
-
-
+      date: ['', Validators.compose([Validators.required])],
+      fecha_ini: ['', Validators.compose([Validators.required])],
+      fecha_fin: ['', Validators.compose([Validators.required])],
+      salario: ['', Validators.compose([Validators.required])],
+      auxilio: [''],
+      horas_ex_diur: [''],
+      horas_ex_domin: [''],
+      recargos_noc: [''],
+      domi_ordinarios: [''],
+      otros: [''],
+      concepto_otros: [''],
     });
   }
   onSubmit({ value, valid }: { value: Base, valid: boolean }) {
     this.submitted = true;
     this.submittedModel = value;
     this.data.base = this.submittedModel;
+    console.log(this.data.modulos)
+    console.log(this.data.bienvenida)
+    console.log(this.data.base)
     this.router.navigate(['base']);
   }
   continuar() {
