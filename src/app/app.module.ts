@@ -15,6 +15,12 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import {MatNativeDateModule} from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import {NgbModule,NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { NgbDateMomentParserFormatter } from './NgbDateMomentParserFormatter';
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -28,13 +34,15 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-  imports:      [ MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
+  imports:      [ AngularFontAwesomeModule,NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
   declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent ],
   bootstrap:    [ AppComponent ],
   exports: [MatDatepickerModule, MatNativeDateModule ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'it' }, //you can change useValue
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    { 
+      provide: NgbDateParserFormatter, 
+      useFactory: () => { return new NgbDateMomentParserFormatter("DD-MM-YYYY") } 
+    }
   ]
 })
 export class AppModule { }

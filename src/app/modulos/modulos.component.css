@@ -1,10 +1,13 @@
-.example-section {
+label {
     display: flex;
     align-content: center;
     align-items: center;
     height: 40px;
   }
   
-  .example-margin {
-    margin: 0 5px;
-  }
+  
+.btn-default{
+    background-color:#CDB380;
+    border: none;
+    margin-top: 5%;
+}

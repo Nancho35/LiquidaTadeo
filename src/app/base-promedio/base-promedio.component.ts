@@ -53,7 +53,6 @@ export class BasePromedioComponent implements OnInit {
     console.log(this.data.modulos)
     console.log(this.data.bienvenida)
     console.log(this.data.base)
-    this.router.navigate(['base']);
   }
   continuar() {
    

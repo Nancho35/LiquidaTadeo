@@ -10,18 +10,21 @@
              
 
           <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
-            
-                <mat-checkbox id="ck1" class="example-section" color="primary"
-                formControlName="ck1">Indemnización</mat-checkbox>
 
-                <mat-checkbox id="ck2" class="example-section" color="primary"
-                formControlName="ck2">Prestaciones sociales</mat-checkbox>
-
-                <mat-checkbox id="ck3" class="example-section" color="primary"
-                formControlName="ck3">Descanso remunerado</mat-checkbox>
-
-                <mat-checkbox id="ck4" class="example-section" color="primary"
-                formControlName="ck4">Pendientes a pagar</mat-checkbox>
+              <div class="btn-group btn-group-toggle">
+                  <label class="btn-primary checkbox" ngbButtonLabel>
+                    <input type="checkbox" formControlName="ck1" ngbButton> Indemnización
+                  </label>
+                  <label class="btn-primary checkbox"  ngbButtonLabel>
+                    <input type="checkbox" formControlName="ck2" ngbButton> Prestaciones sociales
+                  </label>
+                  <label class="btn-primary checkbox" ngbButtonLabel>
+                    <input type="checkbox" formControlName="ck3" ngbButton> Descanso remunerado
+                  </label>
+                  <label class="btn-primary checkbox" ngbButtonLabel>
+                      <input type="checkbox" formControlName="ck4" ngbButton> Pendientes a pagar
+                    </label>
+                </div>
                 
               <button type="submit" class="btn btn-default" [disabled]="!baseForm.valid">Siguiente</button>
           </form>
