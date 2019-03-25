@@ -10,6 +10,33 @@
         <div class="left">            
 
             <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
+                    <div class="form-group">
+                            <div class="input-group">
+                                    <label>Fecha de inicio del cotrato</label>
+                                    <span tooltip="Ingrese la fecha inicial del contrato" placement="right" show-delay="100"><img
+                                        src="assets/descripcion.png" /></span><br>
+                              <input formControlName="fecha_ini"  placeholder="AAAA-MM-DD"
+                                     name="fecha_ini"ngbDatepicker #fecha_ini="ngbDatepicker">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_ini.toggle()" type="button"></button>
+                              </div>
+                            </div>
+                          </div>
+        
+        
+                      
+                          <div class="form-group">
+                                <div class="input-group">
+                                        <label>Fecha fin del contrato</label>
+                                        <span tooltip="Ingrese la fecha final del contrato" placement="right" show-delay="100"><img
+                                            src="assets/descripcion.png" /></span><br>
+                                  <input formControlName="fecha_fin"  placeholder="AAAA-MM-DD"
+                                         name="fecha_fin" ngbDatepicker #fecha_fin="ngbDatepicker">
+                                  <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_fin.toggle()" type="button"></button>
+                                  </div>
+                                </div>
+                              </div>
                 <div class="form-group">
                     <label for="cargo">Cargo desempeñado</label>
                     <span tooltip="Ingrese su cargo" placement="right" show-delay="100"><img
@@ -25,19 +52,6 @@
                                 <option *ngFor="let s of contrato" [value]="s">{{s}}</option>
                             </select>
                     <!--<div class="alert alert-danger" [hidden]="heroForm.controls.email.valid">No es un correo valido</div>-->
-                </div>
-                <div class="form-group">
-                    <label for="jornada">Jornada Laboral</label>
-                    <span tooltip="Seleccione su jornada laboral" placement="right" show-delay="100"><img
-                            src="assets/descripcion.png" /></span>
-                            <input type="number" class="form-control" formControlName="jornada" />
-                    <!--<div class="alert alert-danger" [hidden]="heroForm.controls.email.valid">No es un correo valido</div>-->
-                </div>
-                <div class="form-group">
-                    <label for="tiempo">Tiempo Laborado</label>
-                    <span tooltip="Ingrese el tiempo laborado en dias" placement="right" show-delay="100"><img src="assets/descripcion.png" /></span>
-                    <input type="number" class="form-control" formControlName="tiempo" />
-                    <!-- <div class="alert alert-danger" [hidden]="heroForm.controls.lista.valid">Power is required</div>-->
                 </div>
 
                 <div class="form-group">
@@ -56,9 +70,9 @@
         <div class="right">
             
             
-            <p>Bienvenido a <b>LiquiTadeo</b> el consultorio jurídico de la Universidad Jorge Tadeo Lozano pone a disposición esta herramienta que permitirá  generar su liquidación laboral.</p> 
+            <p>Bienvenido a <b class="lead">LiquiTadeo</b> el consultorio jurídico de la Universidad Jorge Tadeo Lozano pone a disposición esta herramienta que permitirá  generar su liquidación laboral.</p> 
 
-               <p><b>Recuerde:</b> cuando exista conflicto respecto de los derechos del trabajador, deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p> 
+               <p><mark><b class="lead">Recuerde:</b></mark> cuando exista conflicto respecto de los derechos del trabajador, deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p> 
             <div>
                 <h2 class = "resultado_text">{{resultado_text}}</h2>
                 <p class = "resultado_text">{{resultado2_text}}</p>

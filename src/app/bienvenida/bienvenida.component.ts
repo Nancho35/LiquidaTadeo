@@ -23,16 +23,16 @@ export class BienvenidaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contrato = ['Prestación de servicios', 'Termino indefinido'];
-    this.termina = ['Con justa causa', 'Sin justa causa'];
+    this.contrato = ['Termino fijo', 'Termino indefinido','Contrato de obra o labor'];
+    this.termina = ['Con justa causa', 'Sin justa causa','Renuncia'];
 
   }
   createMyForm() {
     return this.formBuilder.group({
+      fecha_ini: ['', Validators.compose([Validators.required])],
+      fecha_fin: ['', Validators.compose([Validators.required])],
       cargo: ['', Validators.compose([Validators.pattern('^[aA-zZ áéíóúÁÉÍÓÚñÑ]{2,35}$'), Validators.required])],
       contrato: ['', Validators.compose([Validators.required])],
-      jornada: ['', Validators.compose([Validators.required])],
-      tiempo: ['', Validators.compose([Validators.pattern('^[0-9]{2}$'), Validators.required])],
       termina: ['', Validators.compose([Validators.required])]
 
 
@@ -40,12 +40,10 @@ export class BienvenidaComponent implements OnInit {
   }
   onSubmit({ value, valid }: { value: Bienvenida, valid: boolean }) {
     this.submitted = true;
-    this.router.navigate(['modulos']);
     this.submittedModel = value;
     this.data.bienvenida = this.submittedModel;
+    this.router.navigate(['base']);
   }
-  continuar() {
-   
-  }
+
 
 }

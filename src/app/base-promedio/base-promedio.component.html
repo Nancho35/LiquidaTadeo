@@ -8,33 +8,7 @@
 
             <div class="left">
                 <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
-                <div class="form-group">
-                    <div class="input-group">
-                            <label>Fecha de inicio</label>
-                            <span tooltip="Ingrese la fecha inicial del contrato" placement="right" show-delay="100"><img
-                                src="assets/descripcion.png" /></span><br>
-                      <input formControlName="fecha_ini"  placeholder="DD-MM-AAAA"
-                             name="fecha_ini"ngbDatepicker #fecha_ini="ngbDatepicker">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_ini.toggle()" type="button"></button>
-                      </div>
-                    </div>
-                  </div>
-
-
-              
-                  <div class="form-group">
-                        <div class="input-group">
-                                <label>Fecha fin</label>
-                                <span tooltip="Ingrese la fecha final del contrato" placement="right" show-delay="100"><img
-                                    src="assets/descripcion.png" /></span><br>
-                          <input formControlName="fecha_fin"  placeholder="DD-MM-AAAA"
-                                 name="fecha_fin" ngbDatepicker #fecha_fin="ngbDatepicker">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_fin.toggle()" type="button"></button>
-                          </div>
-                        </div>
-                      </div>
+                
                     <div class="form-group">
                         <label for="salario">Salario básico</label>
                         <span tooltip="Ingrese su salario" placement="right" show-delay="100"><img
@@ -92,18 +66,7 @@
             <div class="right">
 
 
-                <p>Bienvenido a <b>LiquiTadeo</b> el consultorio jurídico de la Universidad Jorge Tadeo Lozano
-                    <p> pone a disposición esta herramienta que permitirá generar su liquidación laboral.</p>
-
-                    <p><b>Recuerde:</b> cuando exista conflicto respecto de los derechos del trabajador, </p>
-                    <p>deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p>
-                    <div>
-                        <h2 class="resultado_text">{{resultado_text}}</h2>
-                        <p class="resultado_text">{{resultado2_text}}</p>
-                        <p class="resultado_text">{{resultado3_text}}</p>
-                        <p class="resultado">{{resultado}}</p>
-                        <button (click)="continuar()" class="btn btn-primary" *ngIf="condition">Realizar Test</button>
-                    </div>
+                <img src="assets/Tips1.png" >
 
             </div>
 

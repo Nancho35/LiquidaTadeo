@@ -8,22 +8,20 @@
       <div>
         <div class="left">    
              
-
+            <p>Por favor seleccione los <mark>modulos</mark> que desea utilizar : </p>
+            <br>
           <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
-
-              <div class="btn-group btn-group-toggle">
-                  <label class="btn-primary checkbox" ngbButtonLabel>
+              
+              <div class="btn-group-toggle">
+                  <label class="btn-primary" ngbButtonLabel>
                     <input type="checkbox" formControlName="ck1" ngbButton> Indemnización
                   </label>
-                  <label class="btn-primary checkbox"  ngbButtonLabel>
+                  <label class="btn-primary"  ngbButtonLabel>
                     <input type="checkbox" formControlName="ck2" ngbButton> Prestaciones sociales
                   </label>
-                  <label class="btn-primary checkbox" ngbButtonLabel>
+                  <label class="btn-primary" ngbButtonLabel>
                     <input type="checkbox" formControlName="ck3" ngbButton> Descanso remunerado
                   </label>
-                  <label class="btn-primary checkbox" ngbButtonLabel>
-                      <input type="checkbox" formControlName="ck4" ngbButton> Pendientes a pagar
-                    </label>
                 </div>
                 
               <button type="submit" class="btn btn-default" [disabled]="!baseForm.valid">Siguiente</button>
@@ -32,15 +30,7 @@
 
         <div class="right">
           
-          <p>Bienvenido a <b>LiquiTadeo</b> el consultorio jurídico de la Universidad Jorge Tadeo Lozano pone a disposición esta herramienta que permitirá  generar su liquidación laboral.</p> 
-
-             <p><b>Recuerde:</b> cuando exista conflicto respecto de los derechos del trabajador, deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p> 
-          <div>
-              <h2 class = "resultado_text">{{resultado_text}}</h2>
-              <p class = "resultado_text">{{resultado2_text}}</p>
-              <p class = "resultado_text">{{resultado3_text}}</p>
-              <p class = "resultado">{{resultado}}</p>
-          <button  (click)="continuar()" class="btn btn-primary" *ngIf="condition" >Realizar Test</button>
+            <img src="assets/Tips2.png" >
           </div>
 
       </div> 
@@ -48,5 +38,5 @@
   </div>
 
 </div>
-</div>
+
 </mat-card>

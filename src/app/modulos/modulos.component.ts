@@ -23,16 +23,14 @@ export class ModulosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.contrato = ['Prestación de servicios', 'Termino indefinido'];
-    this.termina = ['Con justa causa', 'Sin justa causa'];
+
 
   }
   createMyForm() {
     return this.formBuilder.group({
-      ck1: [''],
-      ck2: [''],
-      ck3: [''],
-      ck4: ['']
+      ck1: [''], //Indemnización
+      ck2: [''], //Prestaciones sociales
+      ck3: [''] //Descanso remunerado
 
     });
   }
@@ -40,7 +38,18 @@ export class ModulosComponent implements OnInit {
     this.submitted = true;
     this.submittedModel = value;
     this.data.modulos = this.submittedModel;
-    this.router.navigate(['base']);
+
+    if (this.data.modulos.ck1 == true) {
+      this.router.navigate(['indemnizacion']);
+    } else if (this.data.modulos.ck2 == true) {
+      this.router.navigate(['prestaciones']);
+    } else if (this.data.modulos.ck3 == true) {
+      this.router.navigate(['vacaciones']);
+    } else {
+      this.router.navigate(['resultado']);
+    }
+
+
 
   }
 

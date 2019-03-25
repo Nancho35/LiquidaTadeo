@@ -34,8 +34,7 @@ export class BasePromedioComponent implements OnInit {
   }
   createMyForm() {
     return this.formBuilder.group({
-      fecha_ini: ['', Validators.compose([Validators.required])],
-      fecha_fin: ['', Validators.compose([Validators.required])],
+      
       salario: ['', Validators.compose([Validators.required])],
       auxilio: [''],
       horas_ex_diur: [''],
@@ -50,9 +49,7 @@ export class BasePromedioComponent implements OnInit {
     this.submitted = true;
     this.submittedModel = value;
     this.data.base = this.submittedModel;
-    console.log(this.data.modulos)
-    console.log(this.data.bienvenida)
-    console.log(this.data.base)
+    this.router.navigate(['modulos']);
   }
   continuar() {
    

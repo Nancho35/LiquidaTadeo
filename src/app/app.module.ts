@@ -7,41 +7,44 @@ import { AppRoutingModule } from './app-routing.module';
 import { CamelToTitlePipe } from './shared/camel-to-title.pipe';
 import {TooltipModule} from 'ng2-tooltip-directive';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { ResultadoComponent } from './resultado/resultado.component';
 import { ModulosComponent } from './modulos/modulos.component';
 import { BasePromedioComponent } from './base-promedio/base-promedio.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatCheckboxModule} from '@angular/material/'; 
 import {MatCardModule} from '@angular/material/card'; 
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import {MatNativeDateModule} from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import {NgbModule,NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule,NgbDateParserFormatter,NgbDatepickerI18n, NgbDateStruct, NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbDateMomentParserFormatter } from './NgbDateMomentParserFormatter';
+import { IndemnizacionComponent } from './indemnizacion/indemnizacion.component';
+import { VacacionesComponent } from './vacaciones/vacaciones.component';
+import { PrestacionesComponent } from './prestaciones/prestaciones.component';
+import { NgbDateCustomParserFormatter } from './NgbDateCustomParserFormatter';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'DD/MM/YYYY',
-  },
-  display: {
-    dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'MM YYYY',
-    dateA11yLabel: 'DD/MM/YYYY',
-    monthYearA11yLabel: 'MM YYYY',
-  },
+
+const I18N_VALUES = {
+  'es': {
+    weekdays: ['Lu', 'Ma', 'Mie', 'Ju', 'Vi', 'Sa', 'Do'],
+    months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+  }
+  // other languages you would support
 };
 
 @NgModule({
   imports:      [ AngularFontAwesomeModule,NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
-  declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent ],
+  declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent, IndemnizacionComponent, VacacionesComponent, PrestacionesComponent, ResultadoComponent ],
   bootstrap:    [ AppComponent ],
   exports: [MatDatepickerModule, MatNativeDateModule ],
   providers: [
     { 
-      provide: NgbDateParserFormatter, 
-      useFactory: () => { return new NgbDateMomentParserFormatter("DD-MM-YYYY") } 
+      provide: NgbDateAdapter, useClass: NgbDateNativeAdapter
+      
+      
     }
   ]
 })

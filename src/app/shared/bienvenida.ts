@@ -5,9 +5,9 @@ export class Bienvenida {
   
     public cargo?: string,
     public contrato?: string,
-    public jornada?: string,
-    public tiempo?: number,
-    public termina?: string
+    public termina?: string,
+    public fecha_ini?: string,
+    public fecha_fin?: string
     
         ) {
 
