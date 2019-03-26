@@ -20,7 +20,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {NgbModule,NgbDateParserFormatter,NgbDatepickerI18n, NgbDateStruct, NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { NgbDateMomentParserFormatter } from './NgbDateMomentParserFormatter';
 import { IndemnizacionComponent } from './indemnizacion/indemnizacion.component';
 import { VacacionesComponent } from './vacaciones/vacaciones.component';
 import { PrestacionesComponent } from './prestaciones/prestaciones.component';
