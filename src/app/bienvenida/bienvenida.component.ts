@@ -22,10 +22,10 @@ export class BienvenidaComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService,config: NgbDatepickerConfig) {
     this.baseForm = this.createMyForm();
     const currentDate = new Date();
-
     config.maxDate = {year:currentDate.getFullYear(), month:currentDate.getMonth()+1, day: currentDate.getDate()};
     config.minDate = {year: 1930, month: 1, day: 1};
     config.outsideDays = 'hidden';
+    config.dayTemplate
   }
 
   ngOnInit() {

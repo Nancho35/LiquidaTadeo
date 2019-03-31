@@ -9,7 +9,8 @@ export class Base {
       public recargos_noc?: number,
       public domi_ordinarios?: number,
       public otros?: number,
-      public concepto_otros?: string
+      public concepto_otros?: string,
+      public sueldo_promedio?: number
           ) {
     }
   }

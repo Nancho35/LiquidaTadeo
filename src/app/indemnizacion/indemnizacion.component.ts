@@ -23,13 +23,10 @@ export class IndemnizacionComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     var time = Math.abs(new Date().getTime() - new Date(this.data.bienvenida.fecha_fin).getTime());
     var diffDays = Math.ceil(time / (1000 * 3600 * 24)); 
-
-
     this.baseForm.patchValue({
-      indemniza_art65: (this.data.base.salario/30)*(diffDays-1)
+      indemniza_art65: ((this.data.base.sueldo_promedio-this.data.base.auxilio)/30)*(diffDays-1)
     });
     
     if (this.data.bienvenida.termina== 'Sin justa causa'){
@@ -50,10 +47,10 @@ export class IndemnizacionComponent implements OnInit {
    
   }
   onSubmit({ value, valid }: { value: Indemnizacion, valid: boolean }) {
+    
     this.submitted = true;
     this.submittedModel = value;
-    this.data.indemnizacion = this.submittedModel;
-   
+    this.data.indemnizacion = this.baseForm.getRawValue();
     
    if (this.data.modulos.ck2 == true) {
       this.router.navigate(['prestaciones']); 

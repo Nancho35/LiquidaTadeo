@@ -46,6 +46,10 @@ export class VacacionesComponent implements OnInit {
   }
 
   onSubmit({ value, valid }: { value: Vacaciones, valid: boolean }) {
+    var time = Math.abs(new Date(value.fecha_ini_vacas).getTime() - new Date(value.fecha_fin_vacas).getTime());
+    var diffDays = Math.ceil(time / (1000 * 3600 * 24)); 
+
+    value.vacaciones = (this.data.base.sueldo_promedio+this.data.base.auxilio)*diffDays/720
     this.submitted = true;
     this.submittedModel = value;
     this.data.vacaciones = this.submittedModel;

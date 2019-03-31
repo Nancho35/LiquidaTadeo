@@ -16,7 +16,8 @@ export class ResultadoComponent implements OnInit {
   }
 
   ngOnInit() {
-    const merged = Object.assign(this.data.bienvenida,this.data.base, this.data.vacaciones,this.data.prestaciones);
+    let total = this.data.prestaciones.total_prestaciones + this.data.vacaciones.vacaciones + this.data.indemnizacion.indemniza_art65
+    const merged = Object.assign(this.data.bienvenida,this.data.base, this.data.vacaciones,this.data.prestaciones,this.data.indemnizacion,total);
     console.log(merged);
 
     let lstLiquida = new Array();
@@ -44,15 +45,17 @@ json2table(json, classes) {
   }
 
   cols.map(function (col) {
+
     headerRow += '<th>' + capitalizeFirstLetter(col) + '</th>';
+
   });
 
   json.map(function (row) {
     bodyRows += '<tr>';
 
     cols.map(function (colName) {
-
-      bodyRows += '<td>' + row[colName] + '</td>';
+        bodyRows += '<td>' + row[colName] + '</td>';
+     
     })
 
     bodyRows += '</tr>';

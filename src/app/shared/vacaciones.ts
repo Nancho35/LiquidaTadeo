@@ -2,7 +2,10 @@ export class Vacaciones
 {
 
     constructor(
-      public tobillos?: string
+      public fecha_ini_vacas?: string,
+      public fecha_fin_vacas?: string,
+      public vacaciones?: number
+
 
           ) {
         

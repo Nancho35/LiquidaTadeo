@@ -32,16 +32,32 @@ export class PrestacionesComponent implements OnInit {
   createMyForm() {
     return this.formBuilder.group({
       fecha_ini_presta: ['', Validators.compose([Validators.required])],
-      fecha_fin_presta: ['', Validators.compose([Validators.required])]
-
-
+      fecha_fin_presta: ['', Validators.compose([Validators.required])],
+      cesantias: [0],
+      inte_cesantias: [0],
+      prima: [0],
+      total_prestaciones: [0]
     });
   }
 
 
   onSubmit({ value, valid }: { value: Prestaciones, valid: boolean }) {
+    //Caculo de prestaciones economicas
+    let time = Math.abs(new Date(value.fecha_ini_presta).getTime() - new Date(value.fecha_fin_presta).getTime());
+    let diffDays = Math.ceil(time / (1000 * 3600 * 24)); 
+
+    let cesantias = (this.data.base.sueldo_promedio*diffDays)/360
+    let inte_cesantias = (cesantias*0.12)/360*diffDays
+
+    value.cesantias = cesantias;
+    value.inte_cesantias = inte_cesantias;
+    value.prima = cesantias;
+
+    value.total_prestaciones = (cesantias*2)+inte_cesantias
+
     this.submitted = true;
     this.submittedModel = value;
+
     this.data.prestaciones = this.submittedModel;
 
     if (this.data.modulos.ck3 == true) {

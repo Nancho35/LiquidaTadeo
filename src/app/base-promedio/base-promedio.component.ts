@@ -35,17 +35,23 @@ export class BasePromedioComponent implements OnInit {
   createMyForm() {
     return this.formBuilder.group({
       
-      salario: ['', Validators.compose([Validators.required])],
-      auxilio: [''],
-      horas_ex_diur: [''],
-      horas_ex_domin: [''],
-      recargos_noc: [''],
-      domi_ordinarios: [''],
-      otros: [''],
+      salario: [0, Validators.compose([Validators.required])],
+      auxilio: [0, Validators.compose([Validators.required])],
+      horas_ex_diur: [0, Validators.compose([Validators.required])],
+      horas_ex_domin: [0, Validators.compose([Validators.required])],
+      recargos_noc: [0, Validators.compose([Validators.required])],
+      domi_ordinarios: [0, Validators.compose([Validators.required])],
+      otros: [0, Validators.compose([Validators.required])],
       concepto_otros: [''],
+      sueldo_promedio: [0, Validators.compose([Validators.required])],
     });
   }
   onSubmit({ value, valid }: { value: Base, valid: boolean }) {
+
+    value.sueldo_promedio =  parseFloat(value.salario.toString()) +  parseFloat(value.auxilio.toString())+
+     parseFloat(value.horas_ex_diur.toString())+  parseFloat(value.horas_ex_domin.toString())+ 
+     parseFloat(value.recargos_noc.toString())+ parseFloat(value.domi_ordinarios.toString())+
+     parseFloat(value.otros.toString());
     this.submitted = true;
     this.submittedModel = value;
     this.data.base = this.submittedModel;

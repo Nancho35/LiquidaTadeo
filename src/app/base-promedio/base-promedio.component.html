@@ -55,10 +55,10 @@
                         <label for="concepto_otros">Concepto del valor</label>
                         <span tooltip="Ingrese concepto correspondiente a lo ingresado en el campo 'Otros valores'" placement="right" show-delay="100"><img
                                 src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="concepto_otros" />
+                        <input type="text" class="form-control" formControlName="concepto_otros" />
                     </div>
 
-
+                    <input type="hidden" formControlName="sueldo_promedio">
                     <button type="submit" class="btn btn-primary" [disabled]="!baseForm.valid">Siguiente</button>
                 </form>
             </div>
