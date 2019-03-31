@@ -18,7 +18,7 @@
                       <span tooltip="Ingrese la fecha inicial de las vacasiones" placement="right" show-delay="100"><img
                           src="assets/descripcion.png" /></span><br>
                 <input formControlName="fecha_ini_vacas"  placeholder="AAAA-MM-DD"
-                       name="fecha_ini_vacas" ngbDatepicker #fecha_ini_vacas="ngbDatepicker">
+                       name="fecha_ini_vacas" ngbDatepicker #fecha_ini_vacas="ngbDatepicker" [markDisabled]="markDisabled">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_ini_vacas.toggle()" type="button"></button>
                 </div>
@@ -31,7 +31,7 @@
                           <span tooltip="Ingrese la fecha final de las vacasiones" placement="right" show-delay="100"><img
                               src="assets/descripcion.png" /></span><br>
                     <input formControlName="fecha_fin_vacas"  placeholder="AAAA-MM-DD"
-                           name="fecha_fin_vacas" ngbDatepicker #fecha_fin_vacas="ngbDatepicker">
+                           name="fecha_fin_vacas" ngbDatepicker #fecha_fin_vacas="ngbDatepicker" [markDisabled]="markDisabled">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_fin_vacas.toggle()" type="button"></button>
                     </div>

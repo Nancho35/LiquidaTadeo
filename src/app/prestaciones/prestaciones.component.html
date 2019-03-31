@@ -18,7 +18,7 @@
                       <span tooltip="Ingrese la fecha inicial de las prestaciones" placement="right" show-delay="100"><img
                           src="assets/descripcion.png" /></span><br>
                 <input formControlName="fecha_ini_presta"  placeholder="AAAA-MM-DD"
-                       name="fecha_ini_presta" ngbDatepicker #fecha_ini_presta="ngbDatepicker">
+                       name="fecha_ini_presta" ngbDatepicker #fecha_ini_presta="ngbDatepicker" [markDisabled]="markDisabled">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_ini_presta.toggle()" type="button"></button>
                 </div>
@@ -31,7 +31,7 @@
                           <span tooltip="Ingrese la fecha final de las prestaciones" placement="right" show-delay="100"><img
                               src="assets/descripcion.png" /></span><br>
                     <input formControlName="fecha_fin_presta"  placeholder="AAAA-MM-DD"
-                           name="fecha_fin_presta" ngbDatepicker #fecha_fin_presta="ngbDatepicker">
+                           name="fecha_fin_presta" ngbDatepicker #fecha_fin_presta="ngbDatepicker" [markDisabled]="markDisabled">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_fin_presta.toggle()" type="button"></button>
                     </div>

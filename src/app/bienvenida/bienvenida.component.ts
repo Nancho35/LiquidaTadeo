@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, } from '@angular/router';
 import { DataService } from '../data.service';
 import { Bienvenida } from '../shared/bienvenida';
+import { NgbDateStruct, NgbDate, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-bienvenida',
   templateUrl: './bienvenida.component.html',
@@ -17,9 +18,14 @@ export class BienvenidaComponent implements OnInit {
   submitted = false;
   model: Bienvenida;
   submittedModel: Bienvenida;
-
-  constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService) {
+  markDisabled: (date: NgbDate) => boolean;
+  constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService,config: NgbDatepickerConfig) {
     this.baseForm = this.createMyForm();
+    const currentDate = new Date();
+
+    config.maxDate = {year:currentDate.getFullYear(), month:currentDate.getMonth()+1, day: currentDate.getDate()};
+    config.minDate = {year: 1930, month: 1, day: 1};
+    config.outsideDays = 'hidden';
   }
 
   ngOnInit() {
@@ -44,6 +50,5 @@ export class BienvenidaComponent implements OnInit {
     this.data.bienvenida = this.submittedModel;
     this.router.navigate(['base']);
   }
-
 
 }

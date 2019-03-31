@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, } from '@angular/router';
 import { DataService } from '../data.service';
 import { Vacaciones } from '../shared/vacaciones';
+import { NgbDate, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-vacaciones',
@@ -15,9 +16,15 @@ export class VacacionesComponent implements OnInit {
   submitted = false;
   model: Vacaciones;
   submittedModel: Vacaciones;
-
-  constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService) {
+  dateString = this.data.bienvenida.fecha_ini
+  newDate = new Date(this.dateString);
+  markDisabled: (date: NgbDate) => boolean;
+  constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService,config: NgbDatepickerConfig) {
     this.baseForm = this.createMyForm();
+    const currentDate = new Date();
+    config.maxDate = {year:currentDate.getFullYear(), month:currentDate.getMonth()+1, day: currentDate.getDate()};
+    config.minDate = {year: this.newDate.getFullYear(), month: this.newDate.getMonth()+1, day: this.newDate.getDate()};
+    config.outsideDays = 'hidden';
   }
 
   ngOnInit() {
@@ -30,6 +37,14 @@ export class VacacionesComponent implements OnInit {
 
     });
   }
+
+  
+  isDisabled() {
+    this.markDisabled = (date: NgbDate) => {
+      return date.day > new Date().getDate() || date.month > new Date().getMonth()+1 || date.year > new Date().getFullYear();
+    };    
+  }
+
   onSubmit({ value, valid }: { value: Vacaciones, valid: boolean }) {
     this.submitted = true;
     this.submittedModel = value;
