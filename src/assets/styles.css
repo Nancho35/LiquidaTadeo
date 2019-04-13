@@ -41,12 +41,12 @@ input.ng-valid, select.ng-valid {
 }
 
 .left{
-	width: 45%;
+	width: 50%;
 	margin-left: 5%;
 	float: left;
 }
 .right{
-	width: 50%;
+	width: 45%;
 	height: 20%;;
 	float: right;
 	padding-right: 10%;

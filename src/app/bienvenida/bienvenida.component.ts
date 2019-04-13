@@ -29,7 +29,7 @@ export class BienvenidaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contrato = ['Termino fijo', 'Termino indefinido','Contrato de obra o labor'];
+    this.contrato = ['Término fijo', 'Término indefinido','Contrato de obra o labor'];
     this.termina = ['Con justa causa', 'Sin justa causa','Renuncia'];
 
   }

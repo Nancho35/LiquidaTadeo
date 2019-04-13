@@ -46,8 +46,7 @@ export class VacacionesComponent implements OnInit {
   }
 
   onSubmit({ value, valid }: { value: Vacaciones, valid: boolean }) {
-    var time = Math.abs(new Date(value.fecha_ini_vacas).getTime() - new Date(value.fecha_fin_vacas).getTime());
-    var diffDays = Math.ceil(time / (1000 * 3600 * 24)); 
+    var diffDays = this.calcularfecha(new Date(this.data.bienvenida.fecha_fin));
 
     value.vacaciones = (this.data.base.sueldo_promedio+this.data.base.auxilio)*diffDays/720
     this.submitted = true;
@@ -55,5 +54,13 @@ export class VacacionesComponent implements OnInit {
     this.data.vacaciones = this.submittedModel;
     this.router.navigate(['resultado']);
   }
+  calcularfecha(fecha:Date){
+    let dia = new Date().getDate();
+    let mes = new Date().getMonth()+1;
+    let anio = new Date().getFullYear();
 
+    return dia-fecha.getDate() + (mes-(fecha.getMonth()+1))*30 + (anio-fecha.getFullYear())*360;
+  
+
+  }
 }

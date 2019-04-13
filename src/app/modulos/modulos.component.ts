@@ -18,6 +18,7 @@ export class ModulosComponent implements OnInit {
   submitted = false;
   model: Modulos;
   submittedModel: Modulos;
+  disabled = false;
 
   constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService) {
     this.baseForm = this.createMyForm();

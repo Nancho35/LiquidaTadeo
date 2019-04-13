@@ -43,8 +43,8 @@ export class PrestacionesComponent implements OnInit {
 
   onSubmit({ value, valid }: { value: Prestaciones, valid: boolean }) {
     //Caculo de prestaciones economicas
-    let time = Math.abs(new Date(value.fecha_ini_presta).getTime() - new Date(value.fecha_fin_presta).getTime());
-    let diffDays = Math.ceil(time / (1000 * 3600 * 24)); 
+    var diffDays = this.calcularfecha(new Date(this.data.bienvenida.fecha_fin));
+
 
     let cesantias = (this.data.base.sueldo_promedio*diffDays)/360
     let inte_cesantias = (cesantias*0.12)/360*diffDays
@@ -65,6 +65,15 @@ export class PrestacionesComponent implements OnInit {
     } else {
       this.router.navigate(['resultado']);
     }
+  }
+  calcularfecha(fecha:Date){
+    let dia = new Date().getDate();
+    let mes = new Date().getMonth()+1;
+    let anio = new Date().getFullYear();
+
+    return dia-fecha.getDate() + (mes-(fecha.getMonth()+1))*30 + (anio-fecha.getFullYear())*360;
+  
+
   }
 
 }

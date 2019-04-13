@@ -16,6 +16,7 @@ export class ResultadoComponent implements OnInit {
   }
 
   ngOnInit() {
+    //TODO redonder decimales hacia arriba
     let total = this.data.prestaciones.total_prestaciones + this.data.vacaciones.vacaciones + this.data.indemnizacion.indemniza_art65
     const merged = Object.assign(this.data.bienvenida,this.data.base, this.data.vacaciones,this.data.prestaciones,this.data.indemnizacion,total);
     console.log(merged);
