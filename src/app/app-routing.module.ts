@@ -7,6 +7,7 @@ import { IndemnizacionComponent} from './indemnizacion/indemnizacion.component';
 import { VacacionesComponent } from './vacaciones/vacaciones.component';
 import { PrestacionesComponent } from './prestaciones/prestaciones.component';
 import { ResultadoComponent } from './resultado/resultado.component';
+import { NoencontradoComponent } from './noencontrado/noencontrado.component';
 
 
 
@@ -18,8 +19,8 @@ const routes: Routes = [
   { path: 'vacaciones',     component: VacacionesComponent  },
   { path: 'prestaciones',     component: PrestacionesComponent  },
   { path: 'resultado',     component: ResultadoComponent  },
-  { path: 'indemnizacion',     component: IndemnizacionComponent  }];
-  
+  { path: 'indemnizacion',     component: IndemnizacionComponent  },
+  {path: '**', component: NoencontradoComponent}];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

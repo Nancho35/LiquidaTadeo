@@ -70,7 +70,7 @@ export class BasePromedioComponent implements OnInit {
       auxilio.updateValueAndValidity();
     };
 
-    if (parseFloat(this.baseForm.value.salario) <= (828116 * 2)) { //TODO
+    if (parseFloat(this.baseForm.value.salario) <= (828116 * 2)) {
       this.show = true;
       auxilio.setValidators([Validators.required, Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{5,6})$")])]);
       auxilio.updateValueAndValidity();

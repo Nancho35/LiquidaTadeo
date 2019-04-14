@@ -54,9 +54,6 @@ input.ng-valid, select.ng-valid {
 }
 
 
-.footer_{
-	margin-top: 20%;
-}
 
 .carta{
 	max-width: 80%;
@@ -65,4 +62,9 @@ input.ng-valid, select.ng-valid {
 span{
 
 	margin-left: 2%;
+}
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
