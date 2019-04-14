@@ -81,152 +81,150 @@ export class IndemnizacionComponent implements OnInit {
   }
 
 
-VerProrroga(): void {
-  const fecha_fin_pactada = this.baseForm.get('fecha_fin_pactada');
-  const num_prorroga = this.baseForm.get('num_pro');
-  if(this.baseForm.get('ver_pro').value) {
-  this.show = true;
-  fecha_fin_pactada.setValidators([Validators.required]);
-  num_prorroga.setValidators([Validators.pattern("^([1-4]{1})?$"), Validators.required]);
-  window.scrollTo(0, document.body.scrollHeight);
-} else {
-  this.show = false;
-  fecha_fin_pactada.clearValidators();;
-  num_prorroga.clearValidators();
-}
-fecha_fin_pactada.updateValueAndValidity();;
-num_prorroga.updateValueAndValidity();
+  VerProrroga(): void {
+    const fecha_fin_pactada = this.baseForm.get('fecha_fin_pactada');
+    const num_prorroga = this.baseForm.get('num_pro');
+    if (this.baseForm.get('ver_pro').value) {
+      this.show = true;
+      fecha_fin_pactada.setValidators([Validators.required]);
+      num_prorroga.setValidators([Validators.pattern("^([1-4]{1})?$"), Validators.required]);
+      window.scrollTo(0, document.body.scrollHeight);
+    } else {
+      this.show = false;
+      fecha_fin_pactada.clearValidators();;
+      num_prorroga.clearValidators();
+    }
+    fecha_fin_pactada.updateValueAndValidity();;
+    num_prorroga.updateValueAndValidity();
 
   }
-pintarProrrogas() {
+  pintarProrrogas() {
 
-  window.scrollTo(0, document.body.scrollHeight);
-  this.pro1 = false;
-  this.pro2 = false;
-  this.pro3 = false;
-  this.pro4 = false;
-  this.mensaje = false;
-  const num_pro = this.baseForm.get('num_pro');
-  if (num_pro.value <= 4) {
-    switch (num_pro.value) {
-      case '1': {
-        this.pro1 = true;
-        break;
-      }
-      case '2': {
-        this.pro1 = true;
-        this.pro2 = true;
-        break;
-      }
-      case '3': {
-        this.pro1 = true;
-        this.pro2 = true;
-        this.pro3 = true;
+    window.scrollTo(0, document.body.scrollHeight);
+    this.pro1 = false;
+    this.pro2 = false;
+    this.pro3 = false;
+    this.pro4 = false;
+    this.mensaje = false;
+    const num_pro = this.baseForm.get('num_pro');
+    if (num_pro.value <= 4) {
+      switch (num_pro.value) {
+        case '1': {
+          this.pro1 = true;
+          break;
+        }
+        case '2': {
+          this.pro1 = true;
+          this.pro2 = true;
+          break;
+        }
+        case '3': {
+          this.pro1 = true;
+          this.pro2 = true;
+          this.pro3 = true;
 
-        break;
-      }
-      case '4': {
-        this.pro1 = true;
-        this.pro2 = true;
-        this.pro3 = true;
-        this.pro4 = true;
-        this.mensaje = true;
+          break;
+        }
+        case '4': {
+          this.pro1 = true;
+          this.pro2 = true;
+          this.pro3 = true;
+          this.pro4 = true;
+          this.mensaje = true;
 
-        break;
-      }
-      default: {
-        console.log("Invalid choice");
-        break;
+          break;
+        }
+        default: {
+          console.log("Invalid choice");
+          break;
+        }
       }
     }
   }
-}
 
-calcularfecha(fecha: Date) {
-  let dia = new Date().getDate();
-  let mes = new Date().getMonth() + 1;
-  let anio = new Date().getFullYear();
+  calcularfecha(fecha: Date) {
+    let dia = new Date().getDate();
+    let mes = new Date().getMonth() + 1;
+    let anio = new Date().getFullYear();
 
-  return dia - fecha.getDate() + (mes - (fecha.getMonth() + 1)) * 30 + (anio - fecha.getFullYear()) * 360;
-
-
-}
-createMyForm() {
-
-  return this.formBuilder.group({
-    indemniza_art65: [{ value: '', disabled: true }],
-    indemniza_art64: [{ value: '', disabled: true }],
-    ver_pro: [''],
-    check65: [''],
-    fecha_ini_pactada: [{ value: '', disabled: true }],
-    fecha_fin_pactada: [''],
-    num_pro: [0],
-    fecha_ini_pro1: [''],
-    fecha_ini_pro2: [''],
-    fecha_ini_pro3: [''],
-    fecha_ini_pro4: [{ value: '', disabled: true }],
-    fecha_fin_pro1: [''],
-    fecha_fin_pro2: [''],
-    fecha_fin_pro3: [''],
-    fecha_fin_pro4: [{ value: '', disabled: true }],
-
-  });
-
-}
-onSubmit({ value, valid }: { value: Indemnizacion, valid: boolean }) {
- 
-  //calcular dias
-  let num_pro = this.baseForm.get('num_pro');
-  let fecha_fin_calcula: Date
-
-  let fecha_fin_pro1 = this.baseForm.get('fecha_fin_pro1').value;
-  let fecha_fin_pro2 = this.baseForm.get('fecha_fin_pro2').value;
-  let fecha_fin_pro3 = this.baseForm.get('fecha_fin_pro3').value;
-  let fecha_fin_pro4 = this.baseForm.get('fecha_fin_pro4').value;
+    return dia - fecha.getDate() + (mes - (fecha.getMonth() + 1)) * 30 + (anio - fecha.getFullYear()) * 360;
 
 
-    switch (num_pro.value) {
-      case '1': {
-        fecha_fin_calcula = fecha_fin_pro1;
-        break;
-      }
-      case '2': {
-        fecha_fin_calcula = fecha_fin_pro2;        
-        break;
-      }
-      case '3': {
-        fecha_fin_calcula = fecha_fin_pro3;        
-        break;
-      }
-      case '4': {
-        fecha_fin_calcula = fecha_fin_pro4;
-        break;
-      }
-      default: {
-        console.log("Invalid choice");
-        break;
-      }
-    }
-    let fecha_fin_pactada = this.baseForm.get('fecha_fin_pactada').value;
-    console.log(fecha_fin_calcula.getDate());
-   console.log(fecha_fin_pactada.getDate());
-   let dias =  Math.abs(fecha_fin_calcula.getDate()-fecha_fin_pactada.getDate());
-   console.log(dias);
-
-  //let dias = value.fecha_ini_pactada.getDate()-fecha_fin_calcula.getDate();
-
-  this.submitted = true;
-  this.submittedModel = value;
-  this.data.indemnizacion = this.baseForm.getRawValue();
-
-  if (this.data.modulos.ck2 == true) {
-    this.router.navigate(['prestaciones']);
-  } else if (this.data.modulos.ck3 == true) {
-    this.router.navigate(['vacaciones']);
-  } else {
-    this.router.navigate(['resultado']);
   }
+  createMyForm() {
 
-}
+    return this.formBuilder.group({
+      indemniza_art65: [{ value: '', disabled: true }],
+      indemniza_art64: [{ value: '', disabled: true }],
+      ver_pro: [''],
+      check65: [''],
+      fecha_ini_pactada: [{ value: '', disabled: true }],
+      fecha_fin_pactada: [''],
+      num_pro: [0],
+      fecha_ini_pro1: [''],
+      fecha_ini_pro2: [''],
+      fecha_ini_pro3: [''],
+      fecha_ini_pro4: [{ value: '', disabled: true }],
+      fecha_fin_pro1: [''],
+      fecha_fin_pro2: [''],
+      fecha_fin_pro3: [''],
+      fecha_fin_pro4: [{ value: '', disabled: true }],
+
+    });
+
+  }
+  onSubmit({ value, valid }: { value: Indemnizacion, valid: boolean }) {
+
+    if (this.show_check == true) {
+
+
+      //calcular dias
+      let num_pro = this.baseForm.get('num_pro');
+      let fecha_fin_calcula: Date
+
+      let fecha_fin_pro1 = this.baseForm.get('fecha_fin_pro1').value;
+      let fecha_fin_pro2 = this.baseForm.get('fecha_fin_pro2').value;
+      let fecha_fin_pro3 = this.baseForm.get('fecha_fin_pro3').value;
+      let fecha_fin_pro4 = this.baseForm.get('fecha_fin_pro4').value;
+
+
+      switch (num_pro.value) {
+        case '1': {
+          fecha_fin_calcula = fecha_fin_pro1;
+          break;
+        }
+        case '2': {
+          fecha_fin_calcula = fecha_fin_pro2;
+          break;
+        }
+        case '3': {
+          fecha_fin_calcula = fecha_fin_pro3;
+          break;
+        }
+        case '4': {
+          fecha_fin_calcula = fecha_fin_pro4;
+          break;
+        }
+        default: {
+          console.log("Invalid choice");
+          break;
+        }
+      }
+      let fecha_fin_pactada = this.baseForm.get('fecha_fin_pactada').value;
+      let dias = Math.abs(fecha_fin_calcula.getDate() - fecha_fin_pactada.getDate());
+    }
+    this.submitted = true;
+    this.submittedModel = value;
+    this.data.indemnizacion = this.baseForm.getRawValue();
+
+    if (this.data.modulos.ck2 == true) {
+      this.router.navigate(['prestaciones']);
+    } else if (this.data.modulos.ck3 == true) {
+      this.router.navigate(['vacaciones']);
+    } else {
+      this.router.navigate(['resultado']);
+    }
+
+  }
 
 }

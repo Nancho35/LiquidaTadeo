@@ -19,31 +19,43 @@
                         <label for="auxilio">Auxilio de transporte</label>
                         <span tooltip="Ingrese el valor del auxilio de transporte(Si el salario no supera 2 SMLV)" placement="right"
                             show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="auxilio"/>
+                        <input type="numeric" class="form-control" formControlName="auxilio" (focusout)="verificaAuxilio()"/>
                     </div>
                     <div class="form-group">
                         <label for="horas_ex_diur">Horas extras diurnas</label>
-                        <span tooltip="Ingrese el número de horas extras diurnas mensuales" placement="right"
+                        <span tooltip="Corresponde al valor de la hora por 1,25" placement="right"
                             show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="horas_ex_diur" />
+                        <input type="numeric" class="form-control" formControlName="horas_ex_diur" (focusout)= "calculaRecargos()"/>
                     </div>
                     <div class="form-group">
-                        <label for="horas_ex_domin">Horas extras nocturnas</label>
-                        <span tooltip="Ingrese el número de horas extras dominicales mensuales" placement="right"
+                        <label for="horas_ex_noc">Horas extras nocturnas</label>
+                        <span tooltip="Corresponde al valor de la hora por 1,75" placement="right"
                             show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="horas_ex_domin" />
+                        <input type="numeric" class="form-control" formControlName="horas_ex_noc" (focusout)= "calculaRecargos()"/>
                     </div>
                     <div class="form-group">
                         <label for="recargos_noc">Recargos nocturnos</label>
-                        <span tooltip="Ingrese el número de recargos nocturnos mensuales" placement="right"
+                        <span tooltip="Corresponde al valor de la hora ordinaria mas el 35%" placement="right"
                             show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="recargos_noc" />
+                        <input type="numeric" class="form-control" formControlName="recargos_noc" (focusout)= "calculaRecargos()"/>
                     </div>
                     <div class="form-group">
                         <label for="domi_ordinarios">Dominicales ordinarios</label>
-                        <span tooltip="Ingrese el número de horas dominicales ordinarias mensuales" placement="right"
+                        <span tooltip="Corresponde al valor de la hora por 1,75" placement="right"
                             show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="domi_ordinarios" />
+                        <input type="numeric" class="form-control" formControlName="domi_ordinarios" (focusout)= "calculaRecargos()"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="horas_ex_domi_diur">Horas extras dominical diurna</label>
+                        <span tooltip="Corresponde al valor de la hora por 2" placement="right"
+                            show-delay="100"><img src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="horas_ex_domi_diur" (focusout)= "calculaRecargos()"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="horas_ex_domi_noc">Horas extras dominical nocturna</label>
+                        <span tooltip="Corresponde al valor de la hora por 2,50" placement="right"
+                            show-delay="100"><img src="assets/descripcion.png" /></span>
+                        <input type="numeric" class="form-control" formControlName="horas_ex_domi_noc" (focusout)= "calculaRecargos()"/>
                     </div>
                     <div class="form-group">
                         <label for="prima_extra">Prima extralegal</label>

@@ -39,9 +39,11 @@ export class BasePromedioComponent implements OnInit {
       salario: [0, Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{5,7})$"), Validators.required])],
       auxilio: [0],
       horas_ex_diur: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$"), Validators.required])],
-      horas_ex_domin: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$"), Validators.required])],
+      horas_ex_noc: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$"), Validators.required])],
       recargos_noc: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$"), Validators.required])],
       domi_ordinarios: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$"), Validators.required])],
+      horas_ex_domi_diur: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$"), Validators.required])],
+      horas_ex_domi_noc: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$"), Validators.required])],
       otros: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$"), Validators.required])],
       concepto_otros: [''],
       sueldo_promedio: [0],
@@ -51,7 +53,7 @@ export class BasePromedioComponent implements OnInit {
   onSubmit({ value, valid }: { value: Base, valid: boolean }) {
 
     value.sueldo_promedio = parseFloat(value.salario.toString()) + parseFloat(value.auxilio.toString()) +
-      parseFloat(value.horas_ex_diur.toString()) + parseFloat(value.horas_ex_domin.toString()) +
+      parseFloat(value.horas_ex_diur.toString()) + parseFloat(value.horas_ex_noc.toString()) +
       parseFloat(value.recargos_noc.toString()) + parseFloat(value.domi_ordinarios.toString()) +
       parseFloat(value.otros.toString());
     this.submitted = true;
@@ -63,17 +65,17 @@ export class BasePromedioComponent implements OnInit {
     const auxilio = this.baseForm.get('auxilio');
     if (parseFloat(this.baseForm.value.salario) > 100) {
       this.calculaRecargos();
-      this.show_imagen= false;
+      this.show_imagen = false;
       auxilio.setValidators([]);
       auxilio.updateValueAndValidity();
     };
 
     if (parseFloat(this.baseForm.value.salario) <= (828116 * 2)) { //TODO
       this.show = true;
-      auxilio.setValidators([Validators.required,Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{5,6})$")])]);
+      auxilio.setValidators([Validators.required, Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{5,6})$")])]);
       auxilio.updateValueAndValidity();
 
-    }else{
+    } else {
       this.show = false;
       auxilio.setValidators([]);
       auxilio.updateValueAndValidity();
@@ -82,56 +84,29 @@ export class BasePromedioComponent implements OnInit {
   }
   calculaRecargos() {
     var recargos = new FilaRecargos();
-    let lstRates = new Array();
-    recargos.valor_mes = this.baseForm.value.salario;
+    recargos.valor_mes = parseFloat(this.baseForm.value.salario);
     recargos.valor_dia = recargos.valor_mes / 30;
     recargos.valor_hora = recargos.valor_dia / 8;
-    recargos.recargo_nocturno = recargos.valor_hora * 0.35;
-    recargos.h_extra_diurna = recargos.valor_hora * 1.25;
-    recargos.h_extra_nocturna = recargos.valor_hora * 1.75;
-    recargos.h_ordinaria_dominical = recargos.h_extra_nocturna;
-    recargos.h_estra_dominical_diurna = recargos.valor_hora * 2;
-    recargos.h_extra_dominical_nocturna = recargos.valor_hora * 2.5;
-    lstRates.push(recargos);
-  
-    document.getElementById('showData').innerHTML = this.json2table(lstRates, 'table');
+    recargos.hora_extra_diurna = recargos.valor_hora * 1.25 * ( this.baseForm.value.horas_ex_diur);
+    recargos.hora_extra_nocturna = recargos.valor_hora * 1.75 * ( this.baseForm.value.horas_ex_noc);
+    recargos.recargo_nocturno = recargos.valor_hora * 0.35  * (this.baseForm.value.recargos_noc);
+    recargos.hora_ordinaria_dominical = recargos.valor_hora * 0.35  * ( this.baseForm.value.domi_ordinarios);
+    recargos.hora_extra_dominical_diurna = recargos.valor_hora * 2 * ( this.baseForm.value.horas_ex_domi_diur);
+    recargos.hora_extra_dominical_nocturna = recargos.valor_hora * 2.5* (this.baseForm.value.horas_ex_domi_noc);
+
+
+    var table = "<table class='table table-hover'><tr><th scope='col'>Descripción</th><th scope='col'>Valor Total</th> </tr>";
+    for(var k in recargos ) {
+      table +="<tr><td>"+k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g,' ')+"</td><td>$"+recargos[k].toLocaleString()+"</td></tr>";
+      };
+
+    document.getElementById('showData').innerHTML = table;
+
   }
 
 
-  json2table(json, classes) {
 
-    var cols = Object.keys(json[0]);
-
-    var headerRow = '';
-    var bodyRows = '';
-
-    classes = classes || '';
-
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    cols.map(function (col) {
-      headerRow += '<th>' + capitalizeFirstLetter(col) + '</th>';
-    });
-    json.map(function (row) {
-      bodyRows += '<tr>';
-
-      cols.map(function (colName) {
-        bodyRows += '<td>' + '$' + row[colName].toLocaleString() + '</td>';
-      })
-
-      bodyRows += '</tr>';
-    });
-
-    return '<table class="' +
-      classes +
-      '"><thead><tr>' +
-      headerRow +
-      '</tr></thead><tbody>' +
-      bodyRows +
-      '</tbody></table>';
-  }
+ 
 }
 
 
@@ -140,11 +115,11 @@ class FilaRecargos {
   valor_dia: number;
   valor_hora: number;
   recargo_nocturno: number;
-  h_extra_diurna: number;
-  h_extra_nocturna: number;
-  h_ordinaria_dominical: number;
-  h_estra_dominical_diurna: number;
-  h_extra_dominical_nocturna: number;
+  hora_extra_diurna: number;
+  hora_extra_nocturna: number;
+  hora_ordinaria_dominical: number;
+  hora_extra_dominical_diurna: number;
+  hora_extra_dominical_nocturna: number;
 
 
 }
