@@ -1,54 +1,76 @@
 <div class="header">
-  <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" /></a> 
+    <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" class="responsive"/></a>
 </div>
-<mat-card class="carta">
 
-<div class="container">
-<div *ngIf="!submitted" class="flex-container">
-    <div>
-      <div class="left">          
-        <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
-            <h4 class="display-5">Vacaciones</h4>
-       
+<div class="todo">
+  <div class="left">
+    <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
+      <h4 class="display-5">Vacaciones</h4>
 
-
-            <div class="form-group">
-              <div class="input-group">
-                      <label>Fecha inicio de las vacaciones</label>
-                      <span tooltip="Ingrese la fecha inicial de las vacaciones que desea calcular" placement="right" show-delay="100"><img
-                          src="assets/descripcion.png" /></span><br>
-                <input formControlName="fecha_ini_vacas"  placeholder="AAAA-MM-DD"
-                       name="fecha_ini_vacas" ngbDatepicker #fecha_ini_vacas="ngbDatepicker" [markDisabled]="markDisabled">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_ini_vacas.toggle()" type="button"></button>
-                </div>
-              </div>
-            </div>
-        
-            <div class="form-group">
-                  <div class="input-group">
-                          <label>Fecha fin de las vacaciones</label>
-                          <span tooltip="Ingrese la fecha final de las vacaciones que desea calcular" placement="right" show-delay="100"><img
-                              src="assets/descripcion.png" /></span><br>
-                    <input formControlName="fecha_fin_vacas"  placeholder="AAAA-MM-DD"
-                           name="fecha_fin_vacas" ngbDatepicker #fecha_fin_vacas="ngbDatepicker" [markDisabled]="markDisabled">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="fecha_fin_vacas.toggle()" type="button"></button>
-                    </div>
-                  </div>
-                </div>
-            <button type="submit" class="btn btn-primary" [disabled]="!baseForm.valid">Siguiente</button>
-        </form>
+      <div class="form-group">
+        <div class="input-group">
+          <label>Fecha inicio de las vacaciones</label>
+          <span
+            tooltip="Ingrese la fecha inicial de las vacaciones que desea calcular"
+            placement="right"
+            show-delay="100"
+            ><img src="assets/descripcion.png"/></span
+          ><br />
+          <input
+            formControlName="fecha_ini_vacas"
+            placeholder="AAAA-MM-DD"
+            name="fecha_ini_vacas"
+            ngbDatepicker
+            #fecha_ini_vacas="ngbDatepicker"
+            [markDisabled]="markDisabled"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary calendar fa fa-calendar"
+              (click)="fecha_ini_vacas.toggle()"
+              type="button"
+            ></button>
+          </div>
+        </div>
       </div>
 
-      <div class="right">
-        
-          <img src="assets/Tips2.png" >
+      <div class="form-group">
+        <div class="input-group">
+          <label>Fecha fin de las vacaciones</label>
+          <span
+            tooltip="Ingrese la fecha final de las vacaciones que desea calcular"
+            placement="right"
+            show-delay="100"
+            ><img src="assets/descripcion.png"/></span
+          ><br />
+          <input
+            formControlName="fecha_fin_vacas"
+            placeholder="AAAA-MM-DD"
+            name="fecha_fin_vacas"
+            ngbDatepicker
+            #fecha_fin_vacas="ngbDatepicker"
+            [markDisabled]="markDisabled"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary calendar fa fa-calendar"
+              (click)="fecha_fin_vacas.toggle()"
+              type="button"
+            ></button>
+          </div>
         </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!baseForm.valid"
+      >
+        Siguiente
+      </button>
+    </form>
+  </div>
 
-    </div> 
-
+  <div class="right">
+    <img src="assets/Tips2.png" />
+  </div>
 </div>
-
-</div>
-</mat-card>

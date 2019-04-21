@@ -26,7 +26,8 @@ import { PrestacionesComponent } from './prestaciones/prestaciones.component';
 import { NgbDateCustomParserFormatter } from './NgbDateCustomParserFormatter';
 import { FooterComponent } from './footer/footer.component';
 import { NoencontradoComponent } from './noencontrado/noencontrado.component';
-
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 
 
 const I18N_VALUES = {
@@ -36,7 +37,7 @@ const I18N_VALUES = {
   }
   // other languages you would support
 };
-
+registerLocaleData(localeEs,   'es');
 @NgModule({
   imports:      [ AngularFontAwesomeModule,NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
   declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent, IndemnizacionComponent, VacacionesComponent, PrestacionesComponent, ResultadoComponent, FooterComponent, NoencontradoComponent ],

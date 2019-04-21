@@ -3,16 +3,20 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, } from '@angular/router';
 import { DataService } from '../data.service';
-
+import { Resultado } from '../shared/resultado';
 @Component({
   selector: 'app-resultado',
   templateUrl: './resultado.component.html',
   styleUrls: ['./resultado.component.css']
 })
-export class ResultadoComponent implements OnInit {
 
-  constructor(public router: Router, private data: DataService) {
-   
+export class ResultadoComponent implements OnInit {
+  baseForm: FormGroup;
+  submitted = false;
+  model: Resultado;
+  submittedModel: Resultado;
+  constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService) {
+    this.baseForm = this.createMyForm();
   }
 
   ngOnInit() {
@@ -27,8 +31,18 @@ export class ResultadoComponent implements OnInit {
        };
  
      document.getElementById('showData').innerHTML = table;
-  
+  }
+  createMyForm() {
+    return this.formBuilder.group({
+      nombres: ['', Validators.compose([Validators.pattern('^[aA-zZ áéíóúÁÉÍÓÚñÑ]{2,35}$'), Validators.required])],
+      correo: ['', Validators.compose([Validators.pattern('^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$'), Validators.required])]
 
+    });
+  }
+  onSubmit({ value, valid }: { value: Resultado, valid: boolean }) {
+    this.submitted = true;
+    this.submittedModel = value;
+    this.data.resultado = this.submittedModel;
   }
 
 

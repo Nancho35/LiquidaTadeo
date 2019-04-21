@@ -12,8 +12,7 @@ import { NgbDateFRParserFormatter } from "../shared/ngb-date-fr-parser-formatter
 @Component({
   selector: 'app-indemnizacion',
   templateUrl: './indemnizacion.component.html',
-  styleUrls: ['./indemnizacion.component.css'],
-  //providers: [{provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}]
+  styleUrls: ['./indemnizacion.component.css']
 })
 export class IndemnizacionComponent implements OnInit {
 
@@ -88,19 +87,24 @@ export class IndemnizacionComponent implements OnInit {
       this.show = true;
       fecha_fin_pactada.setValidators([Validators.required]);
       num_prorroga.setValidators([Validators.pattern("^([1-4]{1})?$"), Validators.required]);
-      window.scrollTo(0, document.body.scrollHeight);
+      window.scrollTo(0, 100000000);
     } else {
       this.show = false;
+      this.pro1 = false;
+      this.pro2 = false;
+      this.pro3 = false;
+      this.pro4 = false;
+      this.mensaje = false;
       fecha_fin_pactada.clearValidators();;
       num_prorroga.clearValidators();
     }
-    fecha_fin_pactada.updateValueAndValidity();;
+    /*fecha_fin_pactada.updateValueAndValidity();;
     num_prorroga.updateValueAndValidity();
-
+*/
   }
   pintarProrrogas() {
 
-    window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, 100000000);
     this.pro1 = false;
     this.pro2 = false;
     this.pro3 = false;

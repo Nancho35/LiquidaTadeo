@@ -3,3 +3,27 @@
     border: none;
     margin-top: 5%;
 }
+.left_resultado{
+    width: 45%;
+    margin-left: 11%;
+    margin-top: 2%;
+    align-items: center;
+  }
+  .right_resultado{
+    width:55%;
+    padding-top: 5%;
+    align-items: center;
+    padding-right: 25%;
+  }
+  @media screen and (max-width:1000px){
+    .todo{
+      flex-direction: column;
+    }
+    .right_resultado,.left_resultado{
+      width: 100%;
+      justify-content: center;
+      align-items: flex-start
+    }
+
+
+  }

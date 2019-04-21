@@ -1,44 +1,55 @@
 <div class="header">
-  <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" /></a>
+    <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" class="responsive"/></a>
 </div>
-<mat-card class="carta">
-
-  <div class="container">
-    <div *ngIf="!submitted" class="flex-container">
+<div class="todo">
+  <div class="left">
+    <div *ngIf="!submitted">
       <div>
-        <div class="left">
+        <p>Por favor habilite los <mark>modulos</mark> que desea utilizar :</p>
+        <br />
+        <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
+          <div class="sideform">
+            <div class="wrap-switch">
+              <div class="spaner">Indemnización</div>
+              <label class="switch">
+                <input type="checkbox" name="ck1" formControlName="ck1" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
 
-          <p>Por favor seleccione los <mark>modulos</mark> que desea utilizar : </p>
-          <br>
-          <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
-          
-              <div class="btn-group-toggle">
-                <label class="btn-primary" ngbButtonLabel>
-                  <input type="checkbox" formControlName="ck1" ngbButton> Indemnización
-                </label>
-                <label class="btn-primary" ngbButtonLabel>
-                  <input type="checkbox" formControlName="ck2" ngbButton> Prestaciones sociales
-                </label>
-                <label class="btn-primary" ngbButtonLabel>
-                  <input type="checkbox" formControlName="ck3" ngbButton> Descanso remunerado
-                </label>
-              </div>
-          
-            <button type="submit" class="btn btn-default" [disabled]="!baseForm.valid">Siguiente</button>
+          <div class="sideform">
+            <div class="wrap-switch">
+              <div class="spaner">Prestaciones sociales</div>
+              <label class="switch">
+                <input type="checkbox" name="ck2" formControlName="ck2" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
 
-            
-          </form>
-        </div>
-
-        <div class="right">
-
-          <img src="assets/Tips2.png">
-        </div>
-
+          <div class="sideform">
+            <div class="wrap-switch">
+              <div class="spaner">Descanso remunerado</div>
+              <label class="switch">
+                <input type="checkbox" name="ck3" formControlName="ck3" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-default"
+            [disabled]="!baseForm.valid"
+          >
+            Siguiente
+          </button>
+        </form>
       </div>
-
+     
     </div>
-
   </div>
-
-</mat-card>
+  <div class="right">
+      <img src="assets/Tips2.png" />
+    </div>
+  </div>

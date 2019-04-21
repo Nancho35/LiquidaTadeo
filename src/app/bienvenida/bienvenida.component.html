@@ -1,12 +1,8 @@
 
 <div class="header">
-        <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" /></a> 
+        <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" class="responsive"/></a>
 </div>
-<mat-card class="carta">
-       
-<div class="container">
-    <div *ngIf="!submitted" class="flex-container">
-            
+<div class="todo">
         <div class="left">            
 
             <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
@@ -82,7 +78,4 @@
             </div>
 
         </div> 
-    
-    </div>
 </div>
-</mat-card>

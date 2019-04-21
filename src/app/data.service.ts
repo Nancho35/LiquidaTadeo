@@ -5,6 +5,7 @@ import { Vacaciones } from './shared/vacaciones';
 import { Base } from './shared/base';
 import { Indemnizacion } from './shared/indemnizacion';
 import { Prestaciones } from './shared/prestaciones';
+import { Resultado } from './shared/resultado';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class DataService {
   public vacaciones: Vacaciones;
   public indemnizacion: Indemnizacion;
   public prestaciones: Prestaciones;
+  public resultado: Resultado;
 
   
   constructor() { }

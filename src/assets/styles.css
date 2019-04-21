@@ -7,7 +7,13 @@ form {
 	width:50%;
 	
 }
-
+th{
+	font-size: 20px;
+}
+.responsive {
+  width: 85%;
+  height: auto;
+}
 h2{
 	font-family: 'Montserrat', sans-serif;
     font-size: 35px;
@@ -36,35 +42,35 @@ input.ng-invalid, select.ng-invalid {
 input.ng-valid, select.ng-valid {
   border-left: 5px solid #42A948;
 }
-.flex-container {
-  clear:both;
-}
 
 .left{
 	width: 50%;
-	margin-left: 5%;
-	float: left;
+	margin-left: 11%;
+	margin-top: 2%;
+	align-items: center;
 }
 .right{
-	width: 45%;
-	height: 20%;;
-	float: right;
-	padding-right: 10%;
-	padding-top: 8%;
+	width:50%;
+	padding-top: 5%;
+	align-items: center;
+	padding-right: 25%;
 }
-
-
-
-.carta{
-	max-width: 80%;
-	margin-left: 6%;
+.todo{
+	display: flex;
 }
-span{
-
-	margin-left: 2%;
+.input-group> label{
+		margin-right:1%;
 }
-router-outlet ~ * {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+.form-group> label{
+	margin-right:1%;
+}
+@media screen and (max-width:1000px){
+	.todo{
+		flex-direction: column;
+	}
+	.right,.left{
+		width: 100%;
+		justify-content: center;
+		align-items: flex-start
+	}
 }

@@ -1,101 +1,173 @@
 <div class="header">
-        <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" /></a> 
+  <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" class="responsive"/></a>
 </div>
-<mat-card class="carta">
-    <div class="container">
-        <div *ngIf="!submitted" class="flex-container">
+<div class="todo">
+  <div class="left_resultado">
+    <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
+      <div class="form-group">
+        <label for="salario">Salario básico</label>
+        <span tooltip="Ingrese su salario" placement="right" show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="numeric"
+          class="form-control"
+          formControlName="salario"
+          (focusout)="verificaAuxilio()"
+        />
+      </div>
+      <div class="form-group" *ngIf="show">
+        <label for="auxilio">Auxilio de transporte</label>
+        <span
+          tooltip="Ingrese el valor del auxilio de transporte(Si el salario no supera 2 SMLV)"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="numeric"
+          class="form-control"
+          formControlName="auxilio"
+          (focusout)="verificaAuxilio()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="horas_ex_diur">Horas extras diurnas</label>
+        <span
+          tooltip="Corresponde al valor de la hora por 1,25"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="numeric"
+          class="form-control"
+          formControlName="horas_ex_diur"
+          (focusout)="calculaRecargos()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="horas_ex_noc">Horas extras nocturnas</label>
+        <span
+          tooltip="Corresponde al valor de la hora por 1,75"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="numeric"
+          class="form-control"
+          formControlName="horas_ex_noc"
+          (focusout)="calculaRecargos()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="recargos_noc">Recargos nocturnos</label>
+        <span
+          tooltip="Corresponde al valor de la hora ordinaria mas el 35%"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="numeric"
+          class="form-control"
+          formControlName="recargos_noc"
+          (focusout)="calculaRecargos()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="domi_ordinarios">Dominicales ordinarios</label>
+        <span
+          tooltip="Corresponde al valor de la hora por 1,75"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="numeric"
+          class="form-control"
+          formControlName="domi_ordinarios"
+          (focusout)="calculaRecargos()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="horas_ex_domi_diur">Horas extras dominical diurna</label>
+        <span
+          tooltip="Corresponde al valor de la hora por 2"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="numeric"
+          class="form-control"
+          formControlName="horas_ex_domi_diur"
+          (focusout)="calculaRecargos()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="horas_ex_domi_noc">Horas extras dominical nocturna</label>
+        <span
+          tooltip="Corresponde al valor de la hora por 2,50"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="numeric"
+          class="form-control"
+          formControlName="horas_ex_domi_noc"
+          (focusout)="calculaRecargos()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="prima_extra">Prima extralegal</label>
+        <span
+          tooltip="Ingrese el valor de prima extra legal que le deben"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input type="numeric" class="form-control" formControlName="otros" />
+      </div>
+      <div class="form-group">
+        <label for="otros">Otros valores</label>
+        <span
+          tooltip="Ingrese otros valores que recibe de manera mensual"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input type="numeric" class="form-control" formControlName="otros" />
+      </div>
+      <div class="form-group">
+        <label for="concepto_otros">Concepto del valor</label>
+        <span
+          tooltip="Ingrese concepto correspondiente a lo ingresado en el campo 'Otros valores'"
+          placement="right"
+          show-delay="100"
+          ><img src="assets/descripcion.png"
+        /></span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="concepto_otros"
+        />
+      </div>
 
+      <input type="hidden" formControlName="sueldo_promedio" />
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!baseForm.valid"
+      >
+        Siguiente
+      </button>
+    </form>
+  </div>
 
-            <div class="left">
-                <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
-                
-                    <div class="form-group">
-                        <label for="salario">Salario básico</label>
-                        <span tooltip="Ingrese su salario" placement="right" show-delay="100"><img
-                                src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="salario" (focusout)="verificaAuxilio()"/>
-                    </div>
-                    <div class="form-group" *ngIf="show">
-                        <label for="auxilio">Auxilio de transporte</label>
-                        <span tooltip="Ingrese el valor del auxilio de transporte(Si el salario no supera 2 SMLV)" placement="right"
-                            show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="auxilio" (focusout)="verificaAuxilio()"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="horas_ex_diur">Horas extras diurnas</label>
-                        <span tooltip="Corresponde al valor de la hora por 1,25" placement="right"
-                            show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="horas_ex_diur" (focusout)= "calculaRecargos()"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="horas_ex_noc">Horas extras nocturnas</label>
-                        <span tooltip="Corresponde al valor de la hora por 1,75" placement="right"
-                            show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="horas_ex_noc" (focusout)= "calculaRecargos()"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="recargos_noc">Recargos nocturnos</label>
-                        <span tooltip="Corresponde al valor de la hora ordinaria mas el 35%" placement="right"
-                            show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="recargos_noc" (focusout)= "calculaRecargos()"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="domi_ordinarios">Dominicales ordinarios</label>
-                        <span tooltip="Corresponde al valor de la hora por 1,75" placement="right"
-                            show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="domi_ordinarios" (focusout)= "calculaRecargos()"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="horas_ex_domi_diur">Horas extras dominical diurna</label>
-                        <span tooltip="Corresponde al valor de la hora por 2" placement="right"
-                            show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="horas_ex_domi_diur" (focusout)= "calculaRecargos()"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="horas_ex_domi_noc">Horas extras dominical nocturna</label>
-                        <span tooltip="Corresponde al valor de la hora por 2,50" placement="right"
-                            show-delay="100"><img src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="horas_ex_domi_noc" (focusout)= "calculaRecargos()"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="prima_extra">Prima extralegal</label>
-                        <span tooltip="Ingrese el valor de prima extra legal que le deben" placement="right" show-delay="100"><img
-                                src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="otros" />
-                    </div>
-                    <div class="form-group">
-                        <label for="otros">Otros valores</label>
-                        <span tooltip="Ingrese otros valores que recibe de manera mensual" placement="right" show-delay="100"><img
-                                src="assets/descripcion.png" /></span>
-                        <input type="numeric" class="form-control" formControlName="otros" />
-                    </div>
-                    <div class="form-group">
-                        <label for="concepto_otros">Concepto del valor</label>
-                        <span tooltip="Ingrese concepto correspondiente a lo ingresado en el campo 'Otros valores'" placement="right" show-delay="100"><img
-                                src="assets/descripcion.png" /></span>
-                        <input type="text" class="form-control" formControlName="concepto_otros" />
-                    </div>
-
-                    <input type="hidden" formControlName="sueldo_promedio">
-                    <button type="submit" class="btn btn-primary" [disabled]="!baseForm.valid">Siguiente</button>
-                </form>
-            </div>
-
-            <div class="right">
-
-                <div id="showData" class="resultados">
-
-                </div>
-
-                <div id="imagen" *ngIf="show_imagen" class="resultados">
-                    <img src="assets/Tips1.png" >
-                </div>
-
-                
-
-            </div>
-
-        </div>
-
-    </div>
-</mat-card>
+  <div class="right_resultado">
+    <div id="showData" class="resultados"></div>
+  </div>
+</div>
