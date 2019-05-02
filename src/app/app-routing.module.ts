@@ -8,6 +8,7 @@ import { VacacionesComponent } from './vacaciones/vacaciones.component';
 import { PrestacionesComponent } from './prestaciones/prestaciones.component';
 import { ResultadoComponent } from './resultado/resultado.component';
 import { NoencontradoComponent } from './noencontrado/noencontrado.component';
+import { PendientesComponent } from './pendientes/pendientes.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'prestaciones',     component: PrestacionesComponent  },
   { path: 'resultado',     component: ResultadoComponent  },
   { path: 'indemnizacion',     component: IndemnizacionComponent  },
+  { path: 'pendientes',     component: PendientesComponent  },
   {path: '**', component: NoencontradoComponent}];
 
 @NgModule({

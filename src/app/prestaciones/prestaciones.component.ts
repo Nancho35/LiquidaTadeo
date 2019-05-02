@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, } from '@angular/router';
+import { Router, NavigationEnd, } from '@angular/router';
 import { DataService } from '../data.service';
 import { Prestaciones } from '../shared/prestaciones';
 import { NgbDate, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -28,6 +28,12 @@ export class PrestacionesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
   createMyForm() {
     return this.formBuilder.group({
@@ -42,8 +48,9 @@ export class PrestacionesComponent implements OnInit {
 
 
   onSubmit({ value, valid }: { value: Prestaciones, valid: boolean }) {
+
     //Caculo de prestaciones economicas
-    var diffDays = this.calcularfecha(new Date(this.data.bienvenida.fecha_fin));
+    var diffDays = this.calcularDias(new Date(value.fecha_ini_presta),new Date(value.fecha_fin_presta));
 
 
     let cesantias = (this.data.base.sueldo_promedio*diffDays)/360
@@ -62,16 +69,14 @@ export class PrestacionesComponent implements OnInit {
 
     if (this.data.modulos.ck3 == true) {
       this.router.navigate(['vacaciones']);
-    } else {
+    } else if (this.data.modulos.ck4 == true) {
+      this.router.navigate(['pendientes']);
+    }else {
       this.router.navigate(['resultado']);
     }
   }
-  calcularfecha(fecha:Date){
-    let dia = new Date().getDate();
-    let mes = new Date().getMonth()+1;
-    let anio = new Date().getFullYear();
-
-    return dia-fecha.getDate() + (mes-(fecha.getMonth()+1))*30 + (anio-fecha.getFullYear())*360;
+  calcularDias(fecha_ini:Date,fecha_fin:Date){
+    return (fecha_fin.getDate()-fecha_ini.getDate() + (fecha_fin.getMonth()+1-(fecha_ini.getMonth()+1))*30 + (fecha_fin.getFullYear()-fecha_ini.getFullYear())*360) +1;
   
 
   }

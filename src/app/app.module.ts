@@ -28,6 +28,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NoencontradoComponent } from './noencontrado/noencontrado.component';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { PendientesComponent } from './pendientes/pendientes.component';
 
 
 const I18N_VALUES = {
@@ -40,7 +41,7 @@ const I18N_VALUES = {
 registerLocaleData(localeEs,   'es');
 @NgModule({
   imports:      [ AngularFontAwesomeModule,NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
-  declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent, IndemnizacionComponent, VacacionesComponent, PrestacionesComponent, ResultadoComponent, FooterComponent, NoencontradoComponent ],
+  declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent, IndemnizacionComponent, VacacionesComponent, PrestacionesComponent, ResultadoComponent, FooterComponent, NoencontradoComponent, PendientesComponent ],
   bootstrap:    [ AppComponent ],
   exports: [MatDatepickerModule, MatNativeDateModule ],
   providers: [

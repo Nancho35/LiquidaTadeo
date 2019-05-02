@@ -6,11 +6,11 @@ export class Recargos {
     public valor_dia?: number,
     public valor_hora?: number,
     public recargo_nocturno?: number,
-    public h_extra_diurna?: number,
-    public h_extra_nocturna?: number,
-    public h_ordinaria_dominical?: number,
-    public h_estra_dominical_diurna?: number,
-    public h_extra_dominical_nocturna?: number
+    public hora_extra_diurna?: number,
+    public hora_extra_nocturna?: number,
+    public hora_ordinaria_dominical?: number,
+    public hora_extra_dominical_diurna?: number,
+    public hora_extra_dominical_nocturna?: number
     
     ) {
     }

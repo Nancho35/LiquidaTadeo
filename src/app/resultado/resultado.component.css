@@ -47,10 +47,13 @@ table {
     margin: .5em 0 .75em;
   }
   
+  .table tr:last-child { background:#ff0000; }
+  
   table tr {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
     padding: .35em;
+    
   }
   
   table th,

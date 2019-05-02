@@ -4,12 +4,20 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-footer',
   template: `
   <footer class="footer">
-  <div class="container">
-  <div class="content has-text-centered">
+  <div class="left">
+
+  <a href="https://www.facebook.com/pg/utadeo.edu.co/"  target="_blank">
+      <img src="assets/face.png" width="30px" height="30px"/></a>
+
+  <a href="https://www.instagram.com/utadeo.edu.co/?hl=es-la" target="_blank">
+      <img src="assets/inst.png" width="30px" height="30px" /></a>
+
+  <a href="https://twitter.com/Utadeo_edu_co" target="_blank">
+      <img src="assets/tw.png" width="30px" height="30px" /></a>
+
     <p>
-      Made with 💕 by <a href="https://twitter.com/nancho35">Hernan Garcia</a>
+      Made with 💕 by <a href="https://twitter.com/nancho35"  target="_blank">Hernan Garcia</a>
     </p>
-  </div>
   </div>
   </footer>
 `

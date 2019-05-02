@@ -45,7 +45,7 @@ export class BienvenidaComponent implements OnInit {
     });
   }
   onSubmit({ value, valid }: { value: Bienvenida, valid: boolean }) {
-    console.log(value.fecha_fin);
+
     this.submitted = true;
     this.submittedModel = value;
     this.data.bienvenida = this.submittedModel;

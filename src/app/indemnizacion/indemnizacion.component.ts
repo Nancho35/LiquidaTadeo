@@ -6,9 +6,6 @@ import { DataService } from '../data.service';
 import { Indemnizacion } from '../shared/indemnizacion';
 import { NgbDateStruct, NgbDate, NgbDatepickerConfig, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { NgbDateFRParserFormatter } from "../shared/ngb-date-fr-parser-formatter"
-
-
 @Component({
   selector: 'app-indemnizacion',
   templateUrl: './indemnizacion.component.html',
@@ -21,6 +18,9 @@ export class IndemnizacionComponent implements OnInit {
   model: Indemnizacion;
   submittedModel: Indemnizacion;
   show: boolean = false;
+  show_art65: boolean = false;
+  show_art64: boolean = false;
+  show_valor64: boolean = false;
   show_check: boolean = false;
   check: any;
   salida: any[] = [];
@@ -29,13 +29,19 @@ export class IndemnizacionComponent implements OnInit {
   pro3: boolean = false;
   pro4: boolean = false;
   mensaje: boolean = false;
+  tipo: string;
+  fecha_ini: Date;
+  fecha_fin: Date;
+  sueldo_promedio: number;
   constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService, config: NgbDatepickerConfig) {
     this.baseForm = this.createMyForm();
-    const fecha_fin = new Date(this.data.bienvenida.fecha_fin);
-    const fecha_ini = new Date(this.data.bienvenida.fecha_ini);
+    this.fecha_fin = new Date(this.data.bienvenida.fecha_fin);
+    this.fecha_ini = new Date(this.data.bienvenida.fecha_ini);
+    this.tipo = data.bienvenida.contrato;
+    this.sueldo_promedio = this.data.base.sueldo_promedio;
 
-    config.maxDate = { year: fecha_fin.getFullYear(), month: fecha_fin.getMonth() + 1, day: fecha_fin.getDate() };
-    config.minDate = { year: fecha_ini.getFullYear(), month: fecha_ini.getMonth() + 1, day: fecha_ini.getDate() };
+    config.maxDate = { year: this.fecha_fin.getFullYear(), month: this.fecha_fin.getMonth() + 1, day: this.fecha_fin.getDate() };
+    config.minDate = { year: this.fecha_ini.getFullYear(), month: this.fecha_ini.getMonth() + 1, day: this.fecha_ini.getDate() };
     config.outsideDays = 'hidden';
     config.dayTemplate
   }
@@ -48,16 +54,15 @@ export class IndemnizacionComponent implements OnInit {
       window.scrollTo(0, 0);
     });
 
-    var diffDays = this.calcularfecha(new Date(this.data.bienvenida.fecha_fin));
-    this.baseForm.patchValue({
-      indemniza_art65: ((this.data.base.sueldo_promedio - this.data.base.auxilio) / 30) * (diffDays - 1),
-      fecha_ini_pactada: this.data.bienvenida.fecha_ini
-    });
-
-    if (this.data.bienvenida.termina == 'Sin justa causa' && this.data.bienvenida.contrato == "Término fijo") {
+    if (this.data.bienvenida.termina == 'Sin justa causa' && (this.tipo == "Término fijo" || this.tipo == "Término indefinido")) {
       this.show_check = true;
     }
+    
+    if (this.restarfecha(new Date(this.fecha_fin)) > 0) {
+      this.show_art64 = true;
+    }
   }
+
 
   calcularProrrogaFinal() {
     const num_pro = this.baseForm.get('num_pro');
@@ -78,29 +83,76 @@ export class IndemnizacionComponent implements OnInit {
 
     }
   }
-
-
-  VerProrroga(): void {
-    const fecha_fin_pactada = this.baseForm.get('fecha_fin_pactada');
-    const num_prorroga = this.baseForm.get('num_pro');
-    if (this.baseForm.get('ver_pro').value) {
-      this.show = true;
-      fecha_fin_pactada.setValidators([Validators.required]);
-      num_prorroga.setValidators([Validators.pattern("^([1-4]{1})?$"), Validators.required]);
-      window.scrollTo(0, 100000000);
+  CalcularArt65(): void {
+    if (this.baseForm.get('check65').value) {
+      var diffDays = this.restarfecha(new Date(this.fecha_fin));
+      if (diffDays > 0) {
+        this.baseForm.patchValue({
+          indemniza_art65:  Math.round((((this.sueldo_promedio - this.data.base.auxilio) / 30) * (diffDays))),  
+          fecha_ini_pactada: this.fecha_ini
+        });
+      }
+      this.show_art65 = true;
     } else {
-      this.show = false;
-      this.pro1 = false;
-      this.pro2 = false;
-      this.pro3 = false;
-      this.pro4 = false;
-      this.mensaje = false;
-      fecha_fin_pactada.clearValidators();;
-      num_prorroga.clearValidators();
+      this.show_art65 = false;
     }
-    /*fecha_fin_pactada.updateValueAndValidity();;
-    num_prorroga.updateValueAndValidity();
-*/
+
+  }
+  CalcularArt64Fijo(): void {
+    if (this.tipo == "Término fijo") {
+      const fecha_fin_pactada = this.baseForm.get('fecha_fin_pactada');
+      const num_prorroga = this.baseForm.get('num_pro');
+      if (this.baseForm.get('calc_art64').value) {
+        this.show = true;
+        fecha_fin_pactada.setValidators([Validators.required]);
+        num_prorroga.setValidators([Validators.pattern("^([1-4]{1})?$"), Validators.required]);
+        window.scrollTo(0, 100000000);
+      } else {
+        this.show = false;
+        this.pro1 = false;
+        this.pro2 = false;
+        this.pro3 = false;
+        this.pro4 = false;
+        this.mensaje = false;
+        fecha_fin_pactada.clearValidators();;
+        num_prorroga.clearValidators();
+      }
+
+    } else {
+      if (this.baseForm.get('calc_art64').value) {
+        this.show_valor64 = true
+        this.calcularArt64Indefinido();
+      } else {
+        this.show_valor64 = false;
+      }
+    }
+
+  }
+  calcularArt64Indefinido() {
+    let b = moment([this.fecha_ini.getFullYear(), this.fecha_ini.getMonth(), this.fecha_ini.getDate()]);
+    let a = moment([this.fecha_fin.getFullYear(), this.fecha_fin.getMonth(), this.fecha_fin.getDate()]);
+
+    let max = Math.abs(a.diff(b, 'years'));
+    b.add(max, 'years');
+
+    var days = a.diff(b, 'days');
+    let suma: number
+    let dias_suma: number
+
+    if (this.sueldo_promedio > (828116 * 10)) {
+      dias_suma = 20;
+      suma = 15;
+    }
+    else {
+      dias_suma = 30;
+      suma = 20;
+    }
+    days = Math.round(suma * days / 360)
+    dias_suma += ((max - 1) * suma) + days;
+
+    this.baseForm.patchValue({
+      indemniza_art64: (Math.round((this.data.base.sueldo_promedio/30) * dias_suma))
+    });
   }
   pintarProrrogas() {
 
@@ -146,21 +198,19 @@ export class IndemnizacionComponent implements OnInit {
     }
   }
 
-  calcularfecha(fecha: Date) {
+  restarfecha(fecha: Date) {
     let dia = new Date().getDate();
     let mes = new Date().getMonth() + 1;
     let anio = new Date().getFullYear();
 
     return dia - fecha.getDate() + (mes - (fecha.getMonth() + 1)) * 30 + (anio - fecha.getFullYear()) * 360;
-
-
   }
   createMyForm() {
 
     return this.formBuilder.group({
       indemniza_art65: [{ value: '', disabled: true }],
       indemniza_art64: [{ value: '', disabled: true }],
-      ver_pro: [''],
+      calc_art64: [''],
       check65: [''],
       fecha_ini_pactada: [{ value: '', disabled: true }],
       fecha_fin_pactada: [''],
@@ -179,7 +229,7 @@ export class IndemnizacionComponent implements OnInit {
   }
   onSubmit({ value, valid }: { value: Indemnizacion, valid: boolean }) {
 
-    if (this.show_check == true) {
+    if (this.show_check == true && this.tipo == "Término fijo") {
 
 
       //calcular dias
@@ -216,6 +266,9 @@ export class IndemnizacionComponent implements OnInit {
       }
       let fecha_fin_pactada = this.baseForm.get('fecha_fin_pactada').value;
       let dias = Math.abs(fecha_fin_calcula.getDate() - fecha_fin_pactada.getDate());
+      this.baseForm.patchValue({
+        indemniza_art64:  Math.round(this.data.recargos.valor_dia * dias)
+      });
     }
     this.submitted = true;
     this.submittedModel = value;
@@ -225,6 +278,8 @@ export class IndemnizacionComponent implements OnInit {
       this.router.navigate(['prestaciones']);
     } else if (this.data.modulos.ck3 == true) {
       this.router.navigate(['vacaciones']);
+    } else if (this.data.modulos.ck4 == true) {
+      this.router.navigate(['pendientes']);
     } else {
       this.router.navigate(['resultado']);
     }

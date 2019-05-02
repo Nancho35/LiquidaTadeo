@@ -2,7 +2,10 @@
 main {
 	margin-left: 25px;
 }
+.footer a {
+	margin-right: 2%;
 
+}
 form {
 	width:50%;
 	
@@ -74,3 +77,4 @@ input.ng-valid, select.ng-valid {
 		align-items: flex-start
 	}
 }
+
