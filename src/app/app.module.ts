@@ -19,7 +19,6 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {NgbModule,NgbDateParserFormatter,NgbDatepickerI18n, NgbDateStruct, NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { IndemnizacionComponent } from './indemnizacion/indemnizacion.component';
 import { VacacionesComponent } from './vacaciones/vacaciones.component';
 import { PrestacionesComponent } from './prestaciones/prestaciones.component';
@@ -40,7 +39,7 @@ const I18N_VALUES = {
 };
 registerLocaleData(localeEs,   'es');
 @NgModule({
-  imports:      [ AngularFontAwesomeModule,NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
+  imports:      [ NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
   declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent, IndemnizacionComponent, VacacionesComponent, PrestacionesComponent, ResultadoComponent, FooterComponent, NoencontradoComponent, PendientesComponent ],
   bootstrap:    [ AppComponent ],
   exports: [MatDatepickerModule, MatNativeDateModule ],
