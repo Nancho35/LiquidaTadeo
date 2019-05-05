@@ -15,6 +15,7 @@ export class ResultadoComponent implements OnInit {
   submitted = false;
   model: Resultado;
   submittedModel: Resultado;
+  email:boolean = false
   constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService) {
     this.baseForm = this.createMyForm();
   }
@@ -75,7 +76,7 @@ export class ResultadoComponent implements OnInit {
 
     var table = "<table class='table table-hover'><tr><th scope='col'>Descripción</th><th scope='col'>Valor Total</th> </tr>";
     for (var k in salida_) {
-      debugger
+
       if (typeof salida_[k] === "number") {
         table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + "$" + salida_[k].toLocaleString() + "</td></tr>";
       } else {
@@ -96,6 +97,7 @@ export class ResultadoComponent implements OnInit {
     this.submitted = true;
     this.submittedModel = value;
     this.data.resultado = this.submittedModel;
+    this.email = true
   }
 
 

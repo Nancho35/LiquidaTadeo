@@ -1,7 +1,5 @@
 <div class="header">
-  <a [routerLink]="['/']"
-    ><img src="assets/top.png" width="1014px" class="responsive"
-  /></a>
+  <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" class="responsive" /></a>
 </div>
 <div class="todo">
   <div class="left_resultado">
@@ -25,24 +23,20 @@
 
       <div class="form-group">
         <label for="correo">Correo electrónico</label>
-        <span
-          tooltip="Ingrese su correo electrónico (micorreo@gmail.com)"
-          placement="right"
-          show-delay="100"
-        >
-          <img src="assets/descripcion.png"
-        /></span>
+        <span tooltip="Ingrese su correo electrónico (micorreo@gmail.com)" placement="right" show-delay="100">
+          <img src="assets/descripcion.png" /></span>
         <input type="email" class="form-control" formControlName="correo" />
         <!--<div class="alert alert-danger" [hidden]="heroForm.controls.apellido.valid">Apellido es requerido</div>-->
       </div>
-
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="!baseForm.valid"
-      >
+     
+    
+      <button type="submit" class="btn btn-primary" [disabled]="!baseForm.valid">
         Enviar
       </button>
+      <div class="email" *ngIf="email">
+        <img src="assets/send2.gif" alt="">
+        <p  class="ocre">Se ha enviado el correo correctamente </p>
+      </div>
     </form>
   </div>
 </div>

@@ -1,3 +1,11 @@
+
+.email{
+  margin-top: 5%;
+}
+.email>img{
+  width: 100px;
+  margin-left: 25%;
+}
 .final{
   display: flex;
 }
