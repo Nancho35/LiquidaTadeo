@@ -16,14 +16,24 @@ export class VacacionesComponent implements OnInit {
   submitted = false;
   model: Vacaciones;
   submittedModel: Vacaciones;
-  dateString = this.data.bienvenida.fecha_ini
-  newDate = new Date(this.dateString);
+  fecha_ini: Date;
+  fecha_fin: Date;
+  tipo: string;
   markDisabled: (date: NgbDate) => boolean;
   constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService,config: NgbDatepickerConfig) {
+    this.tipo = data.bienvenida.contrato;
     this.baseForm = this.createMyForm();
-    const currentDate = new Date();
-    config.maxDate = {year:currentDate.getFullYear(), month:currentDate.getMonth()+1, day: currentDate.getDate()};
-    config.minDate = {year: this.newDate.getFullYear(), month: this.newDate.getMonth()+1, day: this.newDate.getDate()};
+    this.fecha_fin = new Date(this.data.bienvenida.fecha_fin);
+    this.fecha_ini = new Date(this.data.bienvenida.fecha_ini);
+    if(this.tipo == "Término indefinido"){
+      config.maxDate = { year: this.fecha_fin.getFullYear(), month: this.fecha_fin.getMonth() + 1, day: this.fecha_fin.getDate() };
+      config.minDate = { year: this.fecha_ini.getFullYear(), month: this.fecha_ini.getMonth() + 1, day: this.fecha_ini.getDate() };
+    }else{
+      const currentDate = new Date();
+      config.maxDate = {year:currentDate.getFullYear(), month:currentDate.getMonth()+1, day: currentDate.getDate()};
+      config.minDate = { year: this.fecha_ini.getFullYear(), month: this.fecha_ini.getMonth() + 1, day: this.fecha_ini.getDate() };
+    }
+   
     config.outsideDays = 'hidden';
   }
 

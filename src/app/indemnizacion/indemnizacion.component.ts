@@ -39,9 +39,15 @@ export class IndemnizacionComponent implements OnInit {
     this.fecha_ini = new Date(this.data.bienvenida.fecha_ini);
     this.tipo = data.bienvenida.contrato;
     this.sueldo_promedio = this.data.base.sueldo_promedio;
-
-    config.maxDate = { year: this.fecha_fin.getFullYear(), month: this.fecha_fin.getMonth() + 1, day: this.fecha_fin.getDate() };
-    config.minDate = { year: this.fecha_ini.getFullYear(), month: this.fecha_ini.getMonth() + 1, day: this.fecha_ini.getDate() };
+    if(this.tipo == "Término indefinido"){
+      config.maxDate = { year: this.fecha_fin.getFullYear(), month: this.fecha_fin.getMonth() + 1, day: this.fecha_fin.getDate() };
+      config.minDate = { year: this.fecha_ini.getFullYear(), month: this.fecha_ini.getMonth() + 1, day: this.fecha_ini.getDate() };
+    }else{
+      const currentDate = new Date();
+      config.maxDate = {year:currentDate.getFullYear(), month:currentDate.getMonth()+1, day: currentDate.getDate()};
+      config.minDate = { year: this.fecha_ini.getFullYear(), month: this.fecha_ini.getMonth() + 1, day: this.fecha_ini.getDate() };
+    }
+   
     config.outsideDays = 'hidden';
     config.dayTemplate
   }
@@ -227,11 +233,14 @@ export class IndemnizacionComponent implements OnInit {
     });
 
   }
+  calcularDias(fecha_ini:Date,fecha_fin:Date){
+    debugger
+    return Math.abs((fecha_fin.getDate()-fecha_ini.getDate() + (fecha_fin.getMonth()+1-(fecha_ini.getMonth()+1))*30 + (fecha_fin.getFullYear()-fecha_ini.getFullYear())*360))+1;
+
+  }
   onSubmit({ value, valid }: { value: Indemnizacion, valid: boolean }) {
 
     if (this.show_check == true && this.tipo == "Término fijo") {
-
-
       //calcular dias
       let num_pro = this.baseForm.get('num_pro');
       let fecha_fin_calcula: Date
@@ -264,10 +273,9 @@ export class IndemnizacionComponent implements OnInit {
           break;
         }
       }
-      let fecha_fin_pactada = this.baseForm.get('fecha_fin_pactada').value;
-      let dias = Math.abs(fecha_fin_calcula.getDate() - fecha_fin_pactada.getDate());
+      let dias = this.calcularDias(fecha_fin_calcula,this.fecha_fin);
       this.baseForm.patchValue({
-        indemniza_art64:  Math.round(this.data.recargos.valor_dia * dias)
+        indemniza_art64:  Math.round((this.data.base.sueldo_promedio/30) * dias)
       });
     }
     this.submitted = true;

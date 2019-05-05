@@ -1,44 +1,52 @@
 <div class="header">
-  <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" class="responsive"/></a>
+  <a [routerLink]="['/']"><img src="assets/top.png" width="1014px" class="responsive" /></a>
 </div>
 <div class="todo">
-  <div class="left">            
+  <div class="left">
 
-      <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
-        <h4 class="display-5">
-          Salario y otros pendientes de pagar
-        </h4>
-          <div class="form-group">
-              <label for="sueldo_pendiente">Sueldo</label>
-              <span tooltip="Ingrese sueldo pendiente por recibir" placement="right" show-delay="100"><img src="assets/descripcion.png" /></span>
-              <input type="text"  class="form-control" formControlName="sueldo_pendiente" />
-          </div>
-          
-          <div class="form-group">
-            <label for="aux_pendiente">Auxilio de transporte</label>
-            <span tooltip="Ingrese auxilio de transporte pendiente" placement="right" show-delay="100"><img src="assets/descripcion.png" /></span>
-            <input type="text"  class="form-control" formControlName="aux_pendiente" />
-        </div>
-        <div class="form-group">
-          <label for="reajuste_pendiente">Reajuste salarial</label>
-          <span tooltip="Ingrese reajustes salariales pendientes" placement="right" show-delay="100"><img src="assets/descripcion.png" /></span>
-          <input type="text"  class="form-control" formControlName="reajuste_pendiente" />
+    <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
+      <h4 class="display-5">
+        Salario y otros pendientes de pagar
+      </h4>
+      <div class="form-group">
+        <label for="sueldo_pendiente">Sueldo</label>
+        <span tooltip="Ingrese sueldo pendiente por recibir" placement="right" show-delay="100"><img
+            src="assets/descripcion.png" /></span>
+        <input type="text" class="form-control" formControlName="sueldo_pendiente" />
+      </div>
+
+      <div class="form-group">
+        <label for="aux_pendiente">Auxilio de transporte</label>
+        <span tooltip="Ingrese auxilio de transporte pendiente" placement="right" show-delay="100"><img
+            src="assets/descripcion.png" /></span>
+        <input type="text" class="form-control" formControlName="aux_pendiente" />
+      </div>
+      <div class="form-group">
+        <label for="reajuste_pendiente">Reajuste salarial</label>
+        <span tooltip="Ingrese reajustes salariales pendientes" placement="right" show-delay="100"><img
+            src="assets/descripcion.png" /></span>
+        <input type="text" class="form-control" formControlName="reajuste_pendiente" />
       </div>
       <div class="form-group">
         <label for="otros_pendiente">Otros</label>
-        <span tooltip="Ingrese otros valores pendientes" placement="right" show-delay="100"><img src="assets/descripcion.png" /></span>
-        <input type="text"  class="form-control" formControlName="otros_pendiente" />
-    </div>
+        <span tooltip="Ingrese otros valores pendientes" placement="right" show-delay="100"><img
+            src="assets/descripcion.png" /></span>
+        <input type="text" class="form-control" formControlName="otros_pendiente" />
+        <input type="hidden" formControlName="total_pendiente" />
 
-          <button type="submit" class="btn btn-primary" [disabled]="!baseForm.valid">Siguiente</button>
-      </form>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!baseForm.valid">Siguiente</button>
+    </form>
   </div>
 
   <div class="right">
-      
-      
-      <p>Bienvenido a <b class="lead">LiquidaTadeo</b>, el Consultorio jurídico de la Universidad Jorge Tadeo Lozano pone a disposición esta herramienta que permitirá  generar su liquidación laboral.</p> 
 
-         <p><mark><b class="lead">Recuerde:</b></mark> cuando exista conflicto respecto de los derechos del trabajador, deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p> 
-  </div> 
+
+    <p>Bienvenido a <b class="lead">LiquidaTadeo</b>, el Consultorio jurídico de la Universidad Jorge Tadeo Lozano pone
+      a disposición esta herramienta que permitirá generar su liquidación laboral.</p>
+
+    <p><mark><b class="lead">Recuerde:</b></mark> cuando exista conflicto respecto de los derechos del trabajador,
+      deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p>
+  </div>
 </div>

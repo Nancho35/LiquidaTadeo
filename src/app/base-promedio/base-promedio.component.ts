@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationEnd, } from '@angular/router';
 import { DataService } from '../data.service';
@@ -23,7 +23,7 @@ export class BasePromedioComponent implements OnInit {
   show: boolean = false;
   show_imagen = true;
   recargos: Recargos
-  constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService) {
+  constructor(private renderer: Renderer2,private formBuilder: FormBuilder, public router: Router, private data: DataService) {
     this.baseForm = this.createMyForm();
     this.recargos = new Recargos();
   }
@@ -38,6 +38,7 @@ export class BasePromedioComponent implements OnInit {
     });
     this.contrato = ['Prestación de servicios', 'Termino indefinido'];
     this.termina = ['Con justa causa', 'Sin justa causa'];
+    this.renderer.selectRootElement('#salario').focus();
   }
   createMyForm() {
     return this.formBuilder.group({
@@ -53,7 +54,7 @@ export class BasePromedioComponent implements OnInit {
       otros: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$")])],
       concepto_otros: [''],
       sueldo_promedio: [0],
-      prima_extra: [0, Validators.compose([Validators.pattern("^([0-9]{1})|([0-9]{5,7})$"), Validators.required])],
+      prima_extra: [0, Validators.compose([Validators.pattern("^(0)|([1-9]{1})([0-9]{3,7})$"), Validators.required])],
     });
   }
   onSubmit({ value, valid }: { value: Base, valid: boolean }) {
@@ -66,8 +67,7 @@ export class BasePromedioComponent implements OnInit {
     this.submittedModel = value;
     this.data.base = this.submittedModel;
     this.data.recargos = this.recargos;
-    console.log(value.sueldo_promedio);
-    console.log(  this.data.base.sueldo_promedio);
+
 
     this.router.navigate(['modulos']);
   }
@@ -95,8 +95,8 @@ export class BasePromedioComponent implements OnInit {
   calculaRecargos() {
     
     this.recargos.valor_mes = parseFloat(this.baseForm.value.salario);
-    this.recargos.valor_dia = this.recargos.valor_mes / 30;
-    this.recargos.valor_hora = this.recargos.valor_dia / 8;
+    this.recargos.valor_día = this.recargos.valor_mes / 30;
+    this.recargos.valor_hora = this.recargos.valor_día / 8;
     this.recargos.hora_extra_diurna = this.recargos.valor_hora * 1.25 * ( this.baseForm.value.horas_ex_diur);
     this.recargos.hora_extra_nocturna = this.recargos.valor_hora * 1.75 * ( this.baseForm.value.horas_ex_noc);
     this.recargos.recargo_nocturno = this.recargos.valor_hora * 0.35  * (this.baseForm.value.recargos_noc);

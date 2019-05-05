@@ -29,13 +29,15 @@ export class PendientesComponent implements OnInit {
   }
   createMyForm() {
     return this.formBuilder.group({
-      sueldo_pendiente: ['', Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{3,7})$")])],
-      aux_pendiente: ['', Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{3,7})$")])],
-      reajuste_pendiente: ['', Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{3,7})$")])],
-      otros_pendiente:['', Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{3,7})$")])]
+      sueldo_pendiente: [0, Validators.compose([Validators.pattern("^(0)|([1-9]{1})([0-9]{3,7})$")])],
+      aux_pendiente: [0, Validators.compose([Validators.pattern("^(0)|([1-9]{1})([0-9]{3,7})$")])],
+      reajuste_pendiente: [0, Validators.compose([Validators.pattern("^(0)|([1-9]{1})([0-9]{3,7})$")])],
+      otros_pendiente:[0, Validators.compose([Validators.pattern("^(0)|([1-9]{1})([0-9]{3,7})$")])],
+      total_pendiente:[0]
     });
   }
   onSubmit({ value, valid }: { value: Pendientes, valid: boolean }) {
+    value.total_pendiente =  parseFloat(value.sueldo_pendiente.toString()) + parseFloat(value.aux_pendiente.toString()) + parseFloat(value.reajuste_pendiente.toString())+parseFloat(value.otros_pendiente.toString());
     this.submitted = true;
     this.submittedModel = value;
     this.data.pendientes = this.submittedModel;

@@ -1,10 +1,9 @@
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { Router, NavigationEnd, } from '@angular/router';
 import { DataService } from '../data.service';
 import { Modulos } from '../shared/modulos';
-import {requireCheckboxesToBeCheckedValidator} from '../require-checkboxes-to-be-checked.validator';
 
 @Component({
   selector: 'app-modulos',
@@ -34,17 +33,16 @@ export class ModulosComponent implements OnInit {
     });
   }
   createMyForm() {
-    
     return this.formBuilder.group({
-
-        ck1: new FormControl(false),
-        ck2: new FormControl(false),
-        ck3: new FormControl(false),
-        ck4: new FormControl(false)
-
-    }, requireCheckboxesToBeCheckedValidator());
+      ck1: [false],
+      ck2: [false],
+      ck3: [false],
+      ck4: [false]
+    });
   }
-
+  onCheckChange(event){
+   alert("si");
+  }
   onSubmit({ value, valid }: { value: Modulos, valid: boolean }) {
     this.submitted = true;
     this.submittedModel = value;

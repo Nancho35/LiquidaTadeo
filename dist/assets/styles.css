@@ -1,0 +1,80 @@
+
+main {
+	margin-left: 25px;
+}
+.footer a {
+	margin-right: 2%;
+
+}
+form {
+	width:50%;
+	
+}
+th{
+	font-size: 20px;
+}
+.responsive {
+  width: 85%;
+  height: auto;
+}
+h2{
+	font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    font-weight: 600;
+		letter-spacing: 3px;
+		color: #002350;
+		font-style: italic;
+}
+p{
+	color: #002350;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	letter-spacing: 0px;
+}
+.logo {
+	height: 50px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+input.ng-invalid, select.ng-invalid {
+  border-left: 5px solid #a94442;
+}
+
+input.ng-valid, select.ng-valid {
+  border-left: 5px solid #42A948;
+}
+
+.left{
+	width: 50%;
+	margin-left: 11%;
+	margin-top: 2%;
+	align-items: center;
+}
+.right{
+	width:50%;
+	padding-top: 5%;
+	align-items: center;
+	padding-right: 25%;
+}
+.todo{
+	display: flex;
+}
+.input-group> label{
+		margin-right:1%;
+}
+.form-group> label{
+	margin-right:1%;
+}
+@media screen and (max-width:1000px){
+	.todo{
+		flex-direction: column;
+	}
+	.right,.left{
+		width: 100%;
+		justify-content: center;
+		align-items: flex-start
+	}
+}
+
