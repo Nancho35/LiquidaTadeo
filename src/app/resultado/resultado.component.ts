@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationEnd, } from '@angular/router';
 import { DataService } from '../data.service';
 import { Resultado } from '../shared/resultado';
+import { RestService } from '../rest.service';
 @Component({
   selector: 'app-resultado',
   templateUrl: './resultado.component.html',
@@ -16,7 +17,7 @@ export class ResultadoComponent implements OnInit {
   model: Resultado;
   submittedModel: Resultado;
   email:boolean = false
-  constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService) {
+  constructor(public rest:RestService,private formBuilder: FormBuilder, public router: Router, private data: DataService) {
     this.baseForm = this.createMyForm();
   }
 
@@ -98,6 +99,9 @@ export class ResultadoComponent implements OnInit {
     this.submittedModel = value;
     this.data.resultado = this.submittedModel;
     this.email = true
+// Llamada a servicio REST-API
+
+    this.rest.addContrato( this.data.resultado);
   }
 
 

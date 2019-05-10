@@ -34,10 +34,10 @@ export class ModulosComponent implements OnInit {
   }
   createMyForm() {
     return this.formBuilder.group({
-      ck1: [false],
-      ck2: [false],
-      ck3: [false],
-      ck4: [false]
+      ck1: [true],
+      ck2: [true],
+      ck3: [true],
+      ck4: [true]
     });
   }
   onCheckChange(event){

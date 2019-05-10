@@ -39,7 +39,7 @@ export class IndemnizacionComponent implements OnInit {
     this.fecha_ini = new Date(this.data.bienvenida.fecha_ini);
     this.tipo = data.bienvenida.contrato;
     this.sueldo_promedio = this.data.base.sueldo_promedio;
-    if(this.tipo == "Término indefinido"){
+    if(this.tipo == "Término indefinido" || this.tipo == "Contrato de obra o labor"){
       config.maxDate = { year: this.fecha_fin.getFullYear(), month: this.fecha_fin.getMonth() + 1, day: this.fecha_fin.getDate() };
       config.minDate = { year: this.fecha_ini.getFullYear(), month: this.fecha_ini.getMonth() + 1, day: this.fecha_ini.getDate() };
     }else{
@@ -60,7 +60,7 @@ export class IndemnizacionComponent implements OnInit {
       window.scrollTo(0, 0);
     });
 
-    if (this.data.bienvenida.termina == 'Sin justa causa' && (this.tipo == "Término fijo" || this.tipo == "Término indefinido")) {
+    if (this.data.bienvenida.termina == 'Sin justa causa' && (this.tipo == "Término fijo" || this.tipo == "Término indefinido" || this.tipo == "Contrato de obra o labor")) {
       this.show_check = true;
     }
     
@@ -91,7 +91,7 @@ export class IndemnizacionComponent implements OnInit {
   }
   CalcularArt65(): void {
     if (this.baseForm.get('check65').value) {
-      var diffDays = this.restarfecha(new Date(this.fecha_fin));
+      var diffDays = this.restarfecha(new Date(this.fecha_fin.setDate(this.fecha_fin.getDate() +1)));
       if (diffDays > 0) {
         this.baseForm.patchValue({
           indemniza_art65:  Math.round((((this.sueldo_promedio - this.data.base.auxilio) / 30) * (diffDays))),  
@@ -135,6 +135,7 @@ export class IndemnizacionComponent implements OnInit {
 
   }
   calcularArt64Indefinido() {
+    debugger
     let b = moment([this.fecha_ini.getFullYear(), this.fecha_ini.getMonth(), this.fecha_ini.getDate()]);
     let a = moment([this.fecha_fin.getFullYear(), this.fecha_fin.getMonth(), this.fecha_fin.getDate()]);
 
@@ -153,7 +154,7 @@ export class IndemnizacionComponent implements OnInit {
       dias_suma = 30;
       suma = 20;
     }
-    days = Math.round(suma * days / 360)
+    days = (suma * days) / 360
     dias_suma += ((max - 1) * suma) + days;
 
     this.baseForm.patchValue({

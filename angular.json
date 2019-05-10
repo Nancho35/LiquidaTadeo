@@ -27,6 +27,10 @@
               {
                 "input": "./node_modules/font-awesome/css/font-awesome.min.css"
               },
+
+              {
+                "input": "./node_modules/animate.css/animate.css"
+              },
               "src/styles.css"
             ],
              

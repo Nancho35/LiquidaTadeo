@@ -68,7 +68,7 @@ export class PrestacionesComponent implements OnInit {
     value.inte_cesantias = inte_cesantias;
     value.prima = cesantias;
 
-    value.total_prestaciones = (cesantias*2)+inte_cesantias
+    value.total_prestaciones = Math.round((cesantias*2)+inte_cesantias);
 
     this.submitted = true;
     this.submittedModel = value;
