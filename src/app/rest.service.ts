@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { Salaries } from './shared/salaries';
 
-const endpoint = 'xxx';
+const endpointSalary = 'https://salariesapi.herokuapp.com/salaries.json';
+const endpointAdmin = 'https://salariesapi.herokuapp.com/salaries.json';
+
 const header = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 @Injectable({
@@ -11,9 +14,9 @@ const header = new HttpHeaders({ 'Content-Type': 'application/json' });
 })
 
 export class RestService {
-
+  public salaries: Salaries[];
   constructor(private http: HttpClient) {
-   }
+  }
 
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -28,16 +31,15 @@ export class RestService {
   }
   addContrato(contrato) {
     debugger
-    const req = this.http.post(endpoint + 'tests', JSON.stringify(contrato), { headers: header })
-    .subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    const req = this.http.post(endpointSalary + 'tests', JSON.stringify(contrato), { headers: header })
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
-
 
 }

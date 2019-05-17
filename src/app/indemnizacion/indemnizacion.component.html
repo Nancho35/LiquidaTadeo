@@ -18,6 +18,11 @@
         </div>
       </div>
 
+      <div *ngIf="show_vacio" class="animated infinite bounce delay-2s">
+        <p>
+          <mark><b class="lead">No</b></mark> aplica para indemnización
+        </p>
+      </div>
       <div class="form-group" *ngIf="show_art65">
         <input type="numeric" class="form-control" formControlName="indemniza_art65" />
       </div>

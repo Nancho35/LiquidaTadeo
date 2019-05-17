@@ -5,6 +5,7 @@ import { Router, NavigationEnd, } from '@angular/router';
 import { DataService } from '../data.service';
 import { Resultado } from '../shared/resultado';
 import { RestService } from '../rest.service';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-resultado',
   templateUrl: './resultado.component.html',
@@ -17,7 +18,7 @@ export class ResultadoComponent implements OnInit {
   model: Resultado;
   submittedModel: Resultado;
   email:boolean = false
-  constructor(public rest:RestService,private formBuilder: FormBuilder, public router: Router, private data: DataService) {
+  constructor(private http: HttpClient,public rest:RestService,private formBuilder: FormBuilder, public router: Router, private data: DataService) {
     this.baseForm = this.createMyForm();
   }
 
@@ -99,10 +100,24 @@ export class ResultadoComponent implements OnInit {
     this.submittedModel = value;
     this.data.resultado = this.submittedModel;
     this.email = true
+    const merged = Object.assign(this.data.bienvenida, this.data.base,this.data.recargos,this.data.vacaciones, this.data.indemnizacion, this.data.prestaciones, this.data.pendientes,this.data.resultado);
+    console.log(merged);
+
+    const header = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    const req = this.http.post('https://liquidaapi.herokuapp.com/liquidacions', JSON.stringify(merged), { headers: header })
+      .subscribe( 
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+  }
 // Llamada a servicio REST-API
 
-    this.rest.addContrato( this.data.resultado);
-  }
+    //this.rest.addLiquida( this.data.resultado);
 
 
 }

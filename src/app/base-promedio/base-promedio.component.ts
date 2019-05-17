@@ -5,7 +5,10 @@ import { Router, NavigationEnd, } from '@angular/router';
 import { DataService } from '../data.service';
 import { Base } from '../shared/base';
 import { Recargos } from '../shared/recargos';
-
+import { RestService } from '../rest.service';
+import { Salaries } from '../shared/salaries';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { ConstantPool } from '@angular/compiler';
 @Component({
   selector: 'app-base-promedio',
   templateUrl: './base-promedio.component.html',
@@ -22,11 +25,29 @@ export class BasePromedioComponent implements OnInit {
   submittedModel: Base;
   show: boolean = false;
   show_imagen = true;
-  recargos: Recargos
-  constructor(private renderer: Renderer2,private formBuilder: FormBuilder, public router: Router, private data: DataService) {
+  recargos: Recargos;
+  salaries: Salaries[];
+  currentDate = new Date();
+  smlv: number;
+  constructor(private http: HttpClient, public rest: RestService, private renderer: Renderer2, private formBuilder: FormBuilder, public router: Router, private data: DataService) {
     this.baseForm = this.createMyForm();
     this.recargos = new Recargos();
+    const endpointSalary = 'https://salariesapi.herokuapp.com/salaries.json';
+    this.http.get(endpointSalary).subscribe(
+      (data: any[]) => {
+        if (data.length) {
+          //   console.log(data);
+          for (let val of data) {
+            if (val.fecha == this.currentDate.getFullYear()) {
+              this.smlv = val.valor;
+            }
+          }
+        }
+      }
+    )
+
   }
+
 
 
   ngOnInit() {
@@ -59,10 +80,10 @@ export class BasePromedioComponent implements OnInit {
   }
   onSubmit({ value, valid }: { value: Base, valid: boolean }) {
 
-    value.sueldo_promedio = parseFloat(value.salario.toString()) +parseFloat(this.recargos.hora_extra_diurna.toString()) +parseFloat(this.recargos.hora_extra_nocturna.toString())
-    +parseFloat(this.recargos.hora_ordinaria_dominical.toString()) + parseFloat(this.recargos.recargo_nocturno.toString())
-    +parseFloat(this.recargos.hora_extra_dominical_diurna.toString())+parseFloat(this.recargos.hora_extra_dominical_nocturna.toString())
-    +parseFloat(value.otros.toString());
+    value.sueldo_promedio = parseFloat(value.salario.toString()) + parseFloat(this.recargos.hora_extra_diurna.toString()) + parseFloat(this.recargos.hora_extra_nocturna.toString())
+      + parseFloat(this.recargos.hora_ordinaria_dominical.toString()) + parseFloat(this.recargos.recargo_nocturno.toString())
+      + parseFloat(this.recargos.hora_extra_dominical_diurna.toString()) + parseFloat(this.recargos.hora_extra_dominical_nocturna.toString())
+      + parseFloat(value.otros.toString());
     this.submitted = true;
     this.submittedModel = value;
     this.data.base = this.submittedModel;
@@ -79,8 +100,7 @@ export class BasePromedioComponent implements OnInit {
       auxilio.setValidators([]);
       auxilio.updateValueAndValidity();
     };
-
-    if (parseFloat(this.baseForm.value.salario) <= (828116 * 2)) {
+    if (parseFloat(this.baseForm.value.salario) <= (this.smlv * 2)) {
       this.show = true;
       auxilio.setValidators([Validators.required, Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{5,6})$")])]);
       auxilio.updateValueAndValidity();
@@ -93,22 +113,27 @@ export class BasePromedioComponent implements OnInit {
     };
   }
   calculaRecargos() {
-    
+
     this.recargos.valor_mes = parseFloat(this.baseForm.value.salario);
-    this.recargos.valor_día = this.recargos.valor_mes / 30;
-    this.recargos.valor_hora = this.recargos.valor_día / 8;
-    this.recargos.hora_extra_diurna = this.recargos.valor_hora * 1.25 * ( this.baseForm.value.horas_ex_diur);
-    this.recargos.hora_extra_nocturna = this.recargos.valor_hora * 1.75 * ( this.baseForm.value.horas_ex_noc);
-    this.recargos.recargo_nocturno = this.recargos.valor_hora * 0.35  * (this.baseForm.value.recargos_noc);
-    this.recargos.hora_ordinaria_dominical = this.recargos.valor_hora * 0.35  * ( this.baseForm.value.domi_ordinarios);
-    this.recargos.hora_extra_dominical_diurna = this.recargos.valor_hora * 2 * ( this.baseForm.value.horas_ex_domi_diur);
-    this.recargos.hora_extra_dominical_nocturna = this.recargos.valor_hora * 2.5* (this.baseForm.value.horas_ex_domi_noc);
+    this.recargos.valor_dia = this.recargos.valor_mes / 30;
+    this.recargos.valor_hora = this.recargos.valor_dia / 8;
+    this.recargos.hora_extra_diurna = this.recargos.valor_hora * 1.25 * (this.baseForm.value.horas_ex_diur);
+    this.recargos.hora_extra_nocturna = this.recargos.valor_hora * 1.75 * (this.baseForm.value.horas_ex_noc);
+    this.recargos.recargo_nocturno = this.recargos.valor_hora * 0.35 * (this.baseForm.value.recargos_noc);
+    this.recargos.hora_ordinaria_dominical = this.recargos.valor_hora * 0.35 * (this.baseForm.value.domi_ordinarios);
+    this.recargos.hora_extra_dominical_diurna = this.recargos.valor_hora * 2 * (this.baseForm.value.horas_ex_domi_diur);
+    this.recargos.hora_extra_dominical_nocturna = this.recargos.valor_hora * 2.5 * (this.baseForm.value.horas_ex_domi_noc);
 
 
     var table = "<table class='table table-hover'><tr><th scope='col'>Descripción</th><th scope='col'>Valor Total</th> </tr>";
-    for(var k in this.recargos ) {
-      table +="<tr><td>"+k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g,' ')+"</td><td>$"+this.recargos[k].toLocaleString()+"</td></tr>";
-      };
+    for (var k in this.recargos) {
+      if(k == "valor_dia"){
+        table += "<tr><td>Valor día</td><td>$" + this.recargos[k].toLocaleString() + "</td></tr>";
+      }else{
+        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>$" + this.recargos[k].toLocaleString() + "</td></tr>";
+
+      }
+    };
 
     document.getElementById('showData').innerHTML = table;
 
@@ -116,7 +141,7 @@ export class BasePromedioComponent implements OnInit {
 
 
 
- 
+
 }
 
 

@@ -6,6 +6,7 @@ import { DataService } from '../data.service';
 import { Indemnizacion } from '../shared/indemnizacion';
 import { NgbDateStruct, NgbDate, NgbDatepickerConfig, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-indemnizacion',
   templateUrl: './indemnizacion.component.html',
@@ -22,6 +23,7 @@ export class IndemnizacionComponent implements OnInit {
   show_art64: boolean = false;
   show_valor64: boolean = false;
   show_check: boolean = false;
+  show_vacio: boolean = false;
   check: any;
   salida: any[] = [];
   pro1: boolean = false;
@@ -33,7 +35,9 @@ export class IndemnizacionComponent implements OnInit {
   fecha_ini: Date;
   fecha_fin: Date;
   sueldo_promedio: number;
-  constructor(private formBuilder: FormBuilder, public router: Router, private data: DataService, config: NgbDatepickerConfig) {
+  smlv: number;
+  currentDate = new Date();
+  constructor(private http: HttpClient,private formBuilder: FormBuilder, public router: Router, private data: DataService, config: NgbDatepickerConfig) {
     this.baseForm = this.createMyForm();
     this.fecha_fin = new Date(this.data.bienvenida.fecha_fin);
     this.fecha_ini = new Date(this.data.bienvenida.fecha_ini);
@@ -50,8 +54,21 @@ export class IndemnizacionComponent implements OnInit {
    
     config.outsideDays = 'hidden';
     config.dayTemplate
-  }
+    const endpointSalary = 'https://salariesapi.herokuapp.com/salaries.json';
+    this.http.get(endpointSalary).subscribe(
+      (data: any[]) => {
+        if (data.length) {
+          //   console.log(data);
+          for (let val of data) {
+            if (val.fecha == this.currentDate.getFullYear()) {
+              this.smlv = val.valor;
+            }
+          }
+        }
+      }
+    )
 
+  }
   ngOnInit() {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -67,6 +84,12 @@ export class IndemnizacionComponent implements OnInit {
     if (this.restarfecha(new Date(this.fecha_fin)) > 0) {
       this.show_art64 = true;
     }
+
+    if ( this.show_art64 == false && this.show_art65 == false && this.show_check == false ) {
+      this.show_vacio = true;
+    }
+
+    
   }
 
 
@@ -135,7 +158,6 @@ export class IndemnizacionComponent implements OnInit {
 
   }
   calcularArt64Indefinido() {
-    debugger
     let b = moment([this.fecha_ini.getFullYear(), this.fecha_ini.getMonth(), this.fecha_ini.getDate()]);
     let a = moment([this.fecha_fin.getFullYear(), this.fecha_fin.getMonth(), this.fecha_fin.getDate()]);
 
@@ -146,7 +168,7 @@ export class IndemnizacionComponent implements OnInit {
     let suma: number
     let dias_suma: number
 
-    if (this.sueldo_promedio > (828116 * 10)) {
+    if (this.sueldo_promedio > (this.smlv * 10)) {
       dias_suma = 20;
       suma = 15;
     }
