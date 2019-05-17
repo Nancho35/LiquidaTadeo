@@ -90,6 +90,10 @@ export class IndemnizacionComponent implements OnInit {
     }
 
     
+    this.baseForm.patchValue({
+      fecha_ini_pactada: this.fecha_ini
+    });
+    
   }
 
 
@@ -113,6 +117,7 @@ export class IndemnizacionComponent implements OnInit {
     }
   }
   CalcularArt65(): void {
+
     if (this.baseForm.get('check65').value) {
       var diffDays = this.restarfecha(new Date(this.fecha_fin.setDate(this.fecha_fin.getDate() +1)));
       if (diffDays > 0) {
