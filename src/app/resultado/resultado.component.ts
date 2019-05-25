@@ -18,6 +18,7 @@ export class ResultadoComponent implements OnInit {
   model: Resultado;
   submittedModel: Resultado;
   email:boolean = false
+  salida_ = new salida();
   constructor(private http: HttpClient,public rest:RestService,private formBuilder: FormBuilder, public router: Router, private data: DataService) {
     this.baseForm = this.createMyForm();
   }
@@ -30,7 +31,7 @@ export class ResultadoComponent implements OnInit {
       window.scrollTo(0, 0);
     });
     //TODO redonder decimales hacia arriba
-    let salida_ = new salida();
+    
     if (typeof this.data.pendientes === 'undefined') {
       this.data.pendientes = {};
     }
@@ -66,23 +67,23 @@ export class ResultadoComponent implements OnInit {
     if (typeof this.data.indemnizacion.indemniza_art65 === 'undefined') {
       this.data.indemnizacion.indemniza_art65 = 0;
     }
-    salida_.cargo = this.data.bienvenida.cargo;
-    salida_.salario = parseFloat(this.data.base.salario.toString());
-    salida_.total_pendiente = this.data.pendientes.total_pendiente;
-    salida_.total_prestaciones = this.data.prestaciones.total_prestaciones;
-    salida_.vacaciones = this.data.vacaciones.vacaciones;
-    salida_.indemniza_art64 = this.data.indemnizacion.indemniza_art64;
-    salida_.indemniza_art65 = this.data.indemnizacion.indemniza_art65;
+    this.salida_.cargo = this.data.bienvenida.cargo;
+    this.salida_.salario = parseFloat(this.data.base.salario.toString());
+    this.salida_.total_pendiente = this.data.pendientes.total_pendiente;
+    this.salida_.total_prestaciones = this.data.prestaciones.total_prestaciones;
+    this.salida_.vacaciones = this.data.vacaciones.vacaciones;
+    this.salida_.indemniza_art64 = this.data.indemnizacion.indemniza_art64;
+    this.salida_.indemniza_art65 = this.data.indemnizacion.indemniza_art65;
   
-    salida_.total = parseFloat(this.data.pendientes.total_pendiente.toString().replace("", "0")) + parseFloat(this.data.prestaciones.total_prestaciones.toString().replace("", "0")) + parseFloat(this.data.vacaciones.vacaciones.toString().replace("", "0")) + parseFloat(this.data.indemnizacion.indemniza_art64.toString().replace("", "0")) + parseFloat(this.data.indemnizacion.indemniza_art65.toString().replace("", "0"));
+    this.salida_.total = parseFloat(this.data.pendientes.total_pendiente.toString().replace("", "0")) + parseFloat(this.data.prestaciones.total_prestaciones.toString().replace("", "0")) + parseFloat(this.data.vacaciones.vacaciones.toString().replace("", "0")) + parseFloat(this.data.indemnizacion.indemniza_art64.toString().replace("", "0")) + parseFloat(this.data.indemnizacion.indemniza_art65.toString().replace("", "0"));
 
     var table = "<table class='table table-hover'><tr><th scope='col'>Descripción</th><th scope='col'>Valor Total</th> </tr>";
-    for (var k in salida_) {
+    for (var k in this.salida_) {
 
-      if (typeof salida_[k] === "number") {
-        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + "$" + salida_[k].toLocaleString() + "</td></tr>";
+      if (typeof this.salida_[k] === "number") {
+        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + "$" + this.salida_[k].toLocaleString() + "</td></tr>";
       } else {
-        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + salida_[k].toLocaleString() + "</td></tr>";
+        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + this.salida_[k].toLocaleString() + "</td></tr>";
       }
     };
 
@@ -91,17 +92,18 @@ export class ResultadoComponent implements OnInit {
   createMyForm() {
     return this.formBuilder.group({
       nombres: ['', Validators.compose([Validators.pattern('^[aA-zZ áéíóúÁÉÍÓÚñÑ]{2,35}$'), Validators.required])],
-      correo: ['', Validators.compose([Validators.pattern('^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$'), Validators.required])]
-
+      correo: ['', Validators.compose([Validators.pattern('^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$'), Validators.required])],
+      total:[0]
     });
   }
   onSubmit({ value, valid }: { value: Resultado, valid: boolean }) {
+    value.total= this.salida_.total
     this.submitted = true;
     this.submittedModel = value;
     this.data.resultado = this.submittedModel;
     this.email = true
     const merged = Object.assign(this.data.bienvenida, this.data.base,this.data.recargos,this.data.vacaciones, this.data.indemnizacion, this.data.prestaciones, this.data.pendientes,this.data.resultado);
-    console.log(merged);
+console.log(merged)
 
     const header = new HttpHeaders({ 'Content-Type': 'application/json' });
 
