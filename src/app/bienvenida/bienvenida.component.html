@@ -3,7 +3,6 @@
 </div>
 <div class="todo">
         <div class="left">            
-
             <form [formGroup]="baseForm" (ngSubmit)="onSubmit(baseForm)">
                     <div class="form-group">
                             <div class="input-group">
@@ -57,12 +56,14 @@
 
                 <button type="submit" class="btn btn-primary" [disabled]="!baseForm.valid">Siguiente</button>
             </form>
+           
         </div>
 
         <div class="right" >
-            
+          
             <p >Bienvenido a <b class="lead">LiquidaTadeo</b>, el Consultorio jurídico de la Universidad Jorge Tadeo Lozano pone a disposición esta herramienta que permitirá  generar su liquidación laboral.</p> 
 
                <p class="animated jackInTheBox delay-1s slow"><mark><b class="lead">Recuerde:</b></mark> cuando exista conflicto respecto de los derechos del trabajador, deberá acudir a la justicia laboral ordinaria o agendar una cita al consultorio jurídico</p> 
+               <button class="btn" (click)="open()">Ver terminos y condiciones</button>
         </div> 
 </div>

@@ -6,7 +6,7 @@ import { AppComponent }  from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CamelToTitlePipe } from './shared/camel-to-title.pipe';
 import {TooltipModule} from 'ng2-tooltip-directive';
-import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { BienvenidaComponent, NgbdModalContent } from './bienvenida/bienvenida.component';
 import { ResultadoComponent } from './resultado/resultado.component';
 import { ModulosComponent } from './modulos/modulos.component';
 import { BasePromedioComponent } from './base-promedio/base-promedio.component';
@@ -18,7 +18,7 @@ import {MatNativeDateModule} from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import {NgbModule,NgbDateParserFormatter,NgbDatepickerI18n, NgbDateStruct, NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { IndemnizacionComponent } from './indemnizacion/indemnizacion.component';
 import { VacacionesComponent } from './vacaciones/vacaciones.component';
 import { PrestacionesComponent } from './prestaciones/prestaciones.component';
@@ -40,7 +40,10 @@ const I18N_VALUES = {
 registerLocaleData(localeEs,   'es');
 @NgModule({
   imports:      [ NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
-  declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent, IndemnizacionComponent, VacacionesComponent, PrestacionesComponent, ResultadoComponent, FooterComponent, NoencontradoComponent, PendientesComponent ],
+  declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent, IndemnizacionComponent, VacacionesComponent, PrestacionesComponent, ResultadoComponent, FooterComponent, NoencontradoComponent, PendientesComponent,NgbdModalContent ],
+  entryComponents: [
+    NgbdModalContent
+],
   bootstrap:    [ AppComponent ],
   exports: [MatDatepickerModule, MatNativeDateModule ],
   providers: [
