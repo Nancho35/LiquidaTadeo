@@ -15,10 +15,12 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
     </div>
     <div class="modal-body">
       <p>
-      Conforme a lo reglado en la ley 1581 de 2012 y sus derechos reglamentario, autorizo de manera voluntaria, previa, explicita, informativa e inequívoca a la <strong>FUNDACION UNIVERSIDAD DE BOGOTA JORGE TADEO LOZANO</strong>y en particular a su <strong>CONSULTORIO JURIDICO Y CENTRO DE CONCILIACION</strong>, en adelante Universidad, para que registre, recolecte, procese , reporte, conserve, almacene , transfiera transmita, depure, use, analice, circule, suprima, cruce y consulte, o, en general le dé el tratamiento legal respectivo con ocasión d ellos fines propios de la consulta jurídica ante las distintas autoridades judiciales o administrativas o entidades públicas o privadas, cuando así lo quiera el trámite del respectivo caso además para fines académicos, estadísticos, de registro de control o comercial, crediticio, laboral o de cualquier otra naturaleza que haya suministrado y que sea incorporada en bases o banco de datos o en repositorios electrónicos de todo tipo con que cuenta la universidad y que fueren entregados con ocasión de los servicios funciones y competencias propias del consultorio jurídico universitario, y además servicios propios de la Universidad que permiten el cumplimento de sus funciones misionales y visiónales.
-      De conformidad con la ley 1581 de 2012 y decretos reglamentarios, declaro que he sido informado de los siguiente: (i) Que la Universidad, como responsable del tratamiento de mis datos personales, ha puesto a mi disposición el correo electrónico <a href="mailto: protecciondatos@utadeo.edu.co ">protecciondatos@utadeo.edu.co </a>  y la directriz de tratamiento de datos personales en el sitio web <a href="https://www.utadeo.edu.co/es/link/descubre-la-universidad/2/documentos">https://www.utadeo.edu.co/es/link/descubre-la-universidad/2/documentos</a>  (ii) Aue los derechos que me asisten como titular de mis datos personales son los previstos en la constitución y la ley, especialmente el derecho a conocer, actualizar rectificar y suprimir su información personal, los cuales puedo ejercer a través de los canales dispuestos por la Universidad para la atención al público y observando la directriz de tratamiento de datos personales. (ii) Es voluntario responder preguntas eventualmente me sean hechas sobre datos sensibles.
+      Conforme a lo reglado en la ley 1581 de 2012 y sus derechos reglamentario, autorizo de manera voluntaria, previa, explicita, informativa e inequívoca a la <mark>FUNDACION UNIVERSIDAD DE BOGOTA JORGE TADEO LOZANO </mark>y en particular a su <mark>CONSULTORIO JURIDICO Y CENTRO DE CONCILIACION</mark>, en adelante Universidad, para que registre, recolecte, procese , reporte, conserve, almacene , transfiera transmita, depure, use, analice, circule, suprima, cruce y consulte o en general le dé el tratamiento legal respectivo con ocasión de los fines propios de la consulta jurídica ante las distintas autoridades judiciales o administrativas o entidades públicas o privadas, cuando así lo quiera el trámite del respectivo caso además para fines académicos, estadísticos, de registro de control o comercial, crediticio, laboral o de cualquier otra naturaleza que haya suministrado y que sea incorporada en bases o banco de datos o en repositorios electrónicos de todo tipo con que cuenta la universidad y que fueren entregados con ocasión de los servicios funciones y competencias propias del consultorio jurídico universitario, y además servicios propios de la Universidad que permiten el cumplimento de sus funciones misionales y visiónales.
+      <br> </p>
       
-      </p>
+      <p>De conformidad con la ley 1581 de 2012 y decretos reglamentarios, declaro que he sido informado de los siguiente: (i) Que la Universidad, como responsable del tratamiento de mis datos personales, ha puesto a mi disposición el correo electrónico <a href="mailto: protecciondatos@utadeo.edu.co ">protecciondatos@utadeo.edu.co </a>  y la directriz de tratamiento de datos personales en el sitio web <a href="https://www.utadeo.edu.co/es/link/descubre-la-universidad/2/documentos">https://www.utadeo.edu.co/es/link/descubre-la-universidad/2/documentos</a>  (ii) Que los derechos que me asisten como titular de mis datos personales son los previstos en la constitución y la ley, especialmente el derecho a conocer, actualizar rectificar y suprimir su información personal, los cuales puedo ejercer a través de los canales dispuestos por la Universidad para la atención al público y observando la directriz de tratamiento de datos personales. (ii) Es voluntario responder preguntas eventualmente me sean hechas sobre datos sensibles.
+      
+      
     </div>
     <div class="modal-footer">
       <button style=" background-color:#FDB43C;border: none;" type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">Acepto</button>
@@ -67,13 +69,13 @@ export class BienvenidaComponent implements OnInit {
     const modalRef = this.modalService.open(NgbdModalContent);
     modalRef.componentInstance.name = 'World';
   }
-
+  ngAfterViewInit() {
+    setTimeout(() => this.modalService.open(NgbdModalContent));
+  }
 
   ngOnInit() {
     this.contrato = ['Término fijo', 'Término indefinido','Contrato de obra o labor'];
     this.termina = ['Con justa causa', 'Sin justa causa','Renuncia'];
-    const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.name = 'World';
   }
   createMyForm() {
     return this.formBuilder.group({
