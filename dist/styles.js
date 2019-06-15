@@ -680,10 +680,10 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\Users\herna\Documents\LiquidaTadeo\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
-__webpack_require__(/*! c:\Users\herna\Documents\LiquidaTadeo\node_modules\font-awesome\css\font-awesome.min.css */"./node_modules/font-awesome/css/font-awesome.min.css");
-__webpack_require__(/*! c:\Users\herna\Documents\LiquidaTadeo\node_modules\animate.css\animate.css */"./node_modules/animate.css/animate.css");
-module.exports = __webpack_require__(/*! c:\Users\herna\Documents\LiquidaTadeo\src\styles.css */"./src/styles.css");
+__webpack_require__(/*! C:\Users\herna\Documents\LiquidaTadeo\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
+__webpack_require__(/*! C:\Users\herna\Documents\LiquidaTadeo\node_modules\font-awesome\css\font-awesome.min.css */"./node_modules/font-awesome/css/font-awesome.min.css");
+__webpack_require__(/*! C:\Users\herna\Documents\LiquidaTadeo\node_modules\animate.css\animate.css */"./node_modules/animate.css/animate.css");
+module.exports = __webpack_require__(/*! C:\Users\herna\Documents\LiquidaTadeo\src\styles.css */"./src/styles.css");
 
 
 /***/ })
