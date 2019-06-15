@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { fadeAnimation } from './shared/animations';
+import { slider } from './shared/animations';
+import { RouterOutlet } from '@angular/router';
 
-@Component({ 
+@Component({  
   selector: 'app-root',
   templateUrl: './app.component.html',
-  animations: [fadeAnimation] // register the animation
+  animations: [slider] // register the animation
 })
 export class AppComponent { 
   
@@ -13,5 +14,8 @@ export class AppComponent {
   }
   ngOnInit(): void {
   
+  }
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }

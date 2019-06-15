@@ -29,6 +29,8 @@ export class BasePromedioComponent implements OnInit {
   salaries: Salaries[];
   currentDate = new Date();
   smlv: number;
+  aux_transporte: number;
+
   constructor(private http: HttpClient, public rest: RestService, private renderer: Renderer2, private formBuilder: FormBuilder, public router: Router, private data: DataService) {
     this.baseForm = this.createMyForm();
     this.recargos = new Recargos();
@@ -40,6 +42,7 @@ export class BasePromedioComponent implements OnInit {
           for (let val of data) {
             if (val.fecha == this.currentDate.getFullYear()) {
               this.smlv = val.valor;
+              this.aux_transporte = val.aux_transporte;
             }
           }
         }
@@ -60,38 +63,26 @@ export class BasePromedioComponent implements OnInit {
     this.contrato = ['Prestación de servicios', 'Termino indefinido'];
     this.termina = ['Con justa causa', 'Sin justa causa'];
     this.renderer.selectRootElement('#salario').focus();
+    
   }
   createMyForm() {
     return this.formBuilder.group({
 
       salario: [0, Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{5,7})$"), Validators.required])],
-      auxilio: [0],
+      auxilio: [{ value: 0, readonly : true }],
       horas_ex_diur: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$")])],
       horas_ex_noc: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$")])],
       recargos_noc: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$")])],
       domi_ordinarios: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$")])],
       horas_ex_domi_diur: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$")])],
       horas_ex_domi_noc: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$")])],
-      otros: [0, Validators.compose([Validators.pattern("^([0-9]|[1-8][0-9]|9[0-9]|1[0-7][0-9]|180)$")])],
+      otros: [0, Validators.compose([Validators.pattern("^(0)|([1-9]{1})([0-9]{3,7})$")])],
       concepto_otros: [''],
       sueldo_promedio: [0],
-      prima_extra: [0, Validators.compose([Validators.pattern("^(0)|([1-9]{1})([0-9]{3,7})$"), Validators.required])],
+      prima_extra: [0, Validators.compose([Validators.pattern("^(0)|([1-9]{1})([0-9]{3,7})$"), Validators.required])]
     });
   }
-  onSubmit({ value, valid }: { value: Base, valid: boolean }) {
 
-    value.sueldo_promedio = parseFloat(value.salario.toString()) + parseFloat(this.recargos.hora_extra_diurna.toString()) + parseFloat(this.recargos.hora_extra_nocturna.toString())
-      + parseFloat(this.recargos.hora_ordinaria_dominical.toString()) + parseFloat(this.recargos.recargo_nocturno.toString())
-      + parseFloat(this.recargos.hora_extra_dominical_diurna.toString()) + parseFloat(this.recargos.hora_extra_dominical_nocturna.toString())
-      + parseFloat(value.otros.toString());
-    this.submitted = true;
-    this.submittedModel = value;
-    this.data.base = this.submittedModel;
-    this.data.recargos = this.recargos;
-
-
-    this.router.navigate(['modulos']);
-  }
   verificaAuxilio() {
     const auxilio = this.baseForm.get('auxilio');
     if (parseFloat(this.baseForm.value.salario) > 100) {
@@ -101,14 +92,18 @@ export class BasePromedioComponent implements OnInit {
       auxilio.updateValueAndValidity();
     };
     if (parseFloat(this.baseForm.value.salario) <= (this.smlv * 2)) {
+      this.baseForm.patchValue({
+        auxilio: this.aux_transporte 
+      });
       this.show = true;
-      auxilio.setValidators([Validators.required, Validators.compose([Validators.pattern("^([1-9]{1})([0-9]{5,6})$")])]);
-      auxilio.updateValueAndValidity();
+      
 
     } else {
+      this.baseForm.patchValue({
+        auxilio: 0 
+      });
       this.show = false;
-      auxilio.setValidators([]);
-      auxilio.updateValueAndValidity();
+      
 
     };
   }
@@ -139,7 +134,19 @@ export class BasePromedioComponent implements OnInit {
 
   }
 
+  onSubmit({ value, valid }: { value: Base, valid: boolean }) {
+    value.sueldo_promedio = parseFloat(value.salario.toString()) + parseFloat(this.recargos.hora_extra_diurna.toString()) + parseFloat(this.recargos.hora_extra_nocturna.toString())
+      + parseFloat(this.recargos.hora_ordinaria_dominical.toString()) + parseFloat(this.recargos.recargo_nocturno.toString())
+      + parseFloat(this.recargos.hora_extra_dominical_diurna.toString()) + parseFloat(this.recargos.hora_extra_dominical_nocturna.toString())
+      + parseFloat(value.otros.toString());
+    this.submitted = true;
+    this.submittedModel = value;
+    this.data.base = this.submittedModel;
+    this.data.recargos = this.recargos;
 
+
+    this.router.navigate(['modulos']);
+  }
 
 
 }

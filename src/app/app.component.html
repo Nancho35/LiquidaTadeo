@@ -1,8 +1,6 @@
 
 
   
-<main [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
-  <router-outlet #o="outlet"></router-outlet>
-  <app-footer></app-footer>
-</main>
- 
+<div [@routeAnimations]="prepareRoute(outlet)" >
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>

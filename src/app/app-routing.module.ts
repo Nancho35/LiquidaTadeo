@@ -14,14 +14,14 @@ import { PendientesComponent } from './pendientes/pendientes.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/bienvenida' },
-  { path: 'bienvenida',     component: BienvenidaComponent  },
-  { path: 'modulos',     component: ModulosComponent  },
-  { path: 'base',     component: BasePromedioComponent  },
-  { path: 'vacaciones',     component: VacacionesComponent  },
-  { path: 'prestaciones',     component: PrestacionesComponent  },
-  { path: 'resultado',     component: ResultadoComponent  },
-  { path: 'indemnizacion',     component: IndemnizacionComponent  },
-  { path: 'pendientes',     component: PendientesComponent  },
+  { path: 'bienvenida',     component: BienvenidaComponent },
+  { path: 'base',     component: BasePromedioComponent,data: {animation: '*'}   },
+  { path: 'modulos',     component: ModulosComponent,data: {animation: 'isLeft'}   },
+  { path: 'indemnizacion',     component: IndemnizacionComponent,data: {animation: '*'}   },
+  { path: 'prestaciones',     component: PrestacionesComponent,data: {animation: 'isLeft'}   },
+  { path: 'vacaciones',     component: VacacionesComponent,data: {animation: '*'}   },
+  { path: 'pendientes',     component: PendientesComponent,data: {animation: 'isLeft'}   },
+  { path: 'resultado',     component: ResultadoComponent,data: {animation: '*'}   },
   {path: '**', component: NoencontradoComponent}];
 
 @NgModule({

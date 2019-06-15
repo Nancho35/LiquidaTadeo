@@ -72,8 +72,8 @@ export class ResultadoComponent implements OnInit {
     this.salida_.total_pendiente = this.data.pendientes.total_pendiente;
     this.salida_.total_prestaciones = this.data.prestaciones.total_prestaciones;
     this.salida_.vacaciones = this.data.vacaciones.vacaciones;
-    this.salida_.indemniza_art64 = this.data.indemnizacion.indemniza_art64;
-    this.salida_.indemniza_art65 = this.data.indemnizacion.indemniza_art65;
+    this.salida_.indemnización_art_64 = this.data.indemnizacion.indemniza_art64;
+    this.salida_.indemnización_art_65 = this.data.indemnizacion.indemniza_art65;
   
     this.salida_.total = parseFloat(this.data.pendientes.total_pendiente.toString().replace("", "0")) + parseFloat(this.data.prestaciones.total_prestaciones.toString().replace("", "0")) + parseFloat(this.data.vacaciones.vacaciones.toString().replace("", "0")) + parseFloat(this.data.indemnizacion.indemniza_art64.toString().replace("", "0")) + parseFloat(this.data.indemnizacion.indemniza_art65.toString().replace("", "0"));
 
@@ -81,9 +81,9 @@ export class ResultadoComponent implements OnInit {
     for (var k in this.salida_) {
 
       if (typeof this.salida_[k] === "number") {
-        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + "$" + this.salida_[k].toLocaleString() + "</td></tr>";
+        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + "$ " + this.salida_[k].toLocaleString('de-DE') + "</td></tr>";
       } else {
-        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + this.salida_[k].toLocaleString() + "</td></tr>";
+        table += "<tr><td>" + k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ') + "</td><td>" + this.salida_[k].toLocaleString('de-DE') + "</td></tr>";
       }
     };
 
@@ -129,8 +129,8 @@ class salida {
   public total_pendiente: number;
   public total_prestaciones: number;
   public vacaciones: number;
-  public indemniza_art64: number;
-  public indemniza_art65: number;
+  public indemnización_art_64: number;
+  public indemnización_art_65: number;
   public total: number;
 
 

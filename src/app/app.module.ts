@@ -28,7 +28,7 @@ import { NoencontradoComponent } from './noencontrado/noencontrado.component';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { PendientesComponent } from './pendientes/pendientes.component';
-
+import { NgxCurrencyModule } from "ngx-currency";
 
 const I18N_VALUES = {
   'es': {
@@ -39,7 +39,7 @@ const I18N_VALUES = {
 };
 registerLocaleData(localeEs,   'es');
 @NgModule({
-  imports:      [ NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
+  imports:      [ NgxCurrencyModule,NgbModule,BrowserModule, BsDropdownModule.forRoot(), ModalModule.forRoot(),MatDatepickerModule,MatNativeDateModule,MatCardModule,MatCheckboxModule,BrowserAnimationsModule,BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule,TooltipModule,HttpClientModule ],
   declarations: [ AppComponent, AppRoutingModule.components, CamelToTitlePipe, BienvenidaComponent, ModulosComponent, BasePromedioComponent, IndemnizacionComponent, VacacionesComponent, PrestacionesComponent, ResultadoComponent, FooterComponent, NoencontradoComponent, PendientesComponent,NgbdModalContent ],
   entryComponents: [
     NgbdModalContent
