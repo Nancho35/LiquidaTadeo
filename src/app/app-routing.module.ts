@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'pendientes',     component: PendientesComponent,data: {animation: 'isLeft'}   },
   { path: 'resultado',     component: ResultadoComponent,data: {animation: '*'}   },
   {path: '**', component: NoencontradoComponent}];
-
+2
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
