@@ -1,7 +1,7 @@
 # LiquidaTadeo
 
 - Es una herramienta que te permitirá calcular tu liquidación laboral de una manera completa y ágil.
-- Url: https://liquidatadeo.herokuapp.com/ :mega:
+- Url: https://liquidatadeo.herokuapp.com/ :sunglasses:
 
 
 ### Participantes
