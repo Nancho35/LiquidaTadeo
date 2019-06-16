@@ -19,9 +19,9 @@ El aplicativo solicitará al usuario los datos necesarios para calcular la liqui
 
 Calcula tu liquidación laboral y recibiras el resultado en tu correo :mailbox_with_mail:, para los siguientes casos:
 
-- Tipos de Contrato (Fijo, Infefinido, obra labor) :hourglass_flowing_sand:
-- Modos de terminación (Con justa causa, sin justa causa, renuncia)  :scroll:
-- Calcula en detalle los siguientes valores :moneybag:
+- :hourglass_flowing_sand: Tipos de Contrato (Fijo, Infefinido, obra labor) 
+- :scroll: Modos de terminación (Con justa causa, sin justa causa, renuncia)  
+- :moneybag: Calcula en detalle los siguientes valores 
   - Valor mes
   - Valor día
   - Valor hora
@@ -31,7 +31,7 @@ Calcula tu liquidación laboral y recibiras el resultado en tu correo :mailbox_w
   - Horas extras dominical diurnas
   - Horas extras dominical nocturnas
   - Horas ordinarias dominicales
-- Indemnización por articulo 64 y 65 :money_with_wings:
-- Prestaciones sociales(Prima, censantias, intereses de cesantias) :gem:
-- Desacanso remunerado (vacaciones) :surfer:
-- Saldos y otros pendientes :pencil2:
+- :money_with_wings: Indemnización por articulo 64 y 65 
+- :gem: Prestaciones sociales(Prima, censantias, intereses de cesantias) 
+- :surfer: Desacanso remunerado (vacaciones) 
+- :pencil2: Saldos y otros pendientes 
