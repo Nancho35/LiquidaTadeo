@@ -1,1 +1,37 @@
 # LiquidaTadeo
+
+- Es una herramienta que te permitirá calcular tu liquidación laboral de una manera completa y ágil.
+- Url: https://liquidatadeo.herokuapp.com/ :mega:
+
+
+### Participantes
+- Hernán García (@Nancho35) 		:octocat:
+
+### Descripción 
+
+El presente proyecto pretende crear un aplicativo web que permita calcular las prestaciones sociales luego de finalizar una actividad laboral teniendo en cuenta todos los factores legales y casuísticas dadas.
+
+El aplicativo solicitará al usuario los datos necesarios para calcular la liquidación laboral, de una manera clara y concisa con el fin de que cualquier ciudadano pueda realizar el proceso aun sin conocer las leyes vigentes, además el aplicativo tendrá una sección donde el usuario podrá conocer por medio de capsulas informativas de leyes laborales y los derechos que tiene como empleado.
+
+
+
+### Funciones Básicas
+
+Calcula tu liquidación laboral y recibiras el resultado en tu correo :mailbox_with_mail:, para los siguientes casos:
+
+	- Tipos de Contrato (Fijo, Infefinido, obra labor) :hourglass_flowing_sand:
+	- Modos de terminación (Con justa causa, sin justa causa, renuncia)  :scroll:
+	- Calcula en detalle los siguientes valores :moneybag:
+    - Valor mes
+    - Valor día
+    - Valor hora
+    - Recargo nocturno
+    - Horas extras diurnas
+    - Horas extras nocturnas
+    - Horas extras dominical diurnas
+    - Horas extras dominical nocturnas
+    - Horas ordinarias dominicales
+	- Indemnización por articulo 64 y 65 :money_with_wings:
+	- Prestaciones sociales(Prima, censantias, intereses de cesantias) :gem:
+	- Desacanso remunerado (vacaciones) :surfer:
+  - Saldos y otros pendientes :pencil2:
