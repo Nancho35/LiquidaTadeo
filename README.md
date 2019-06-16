@@ -38,6 +38,6 @@ Calcula tu liquidación laboral y recibiras el resultado en tu correo :mailbox_w
 
 
 ### Imagenes
-![alt text](https://raw.githubusercontent.com/nancho35/LiquidaTadeo/master/src/assets/top.png)
+![alt text](https://imgur.com/lPvPKWT)
 
 
