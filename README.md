@@ -35,3 +35,9 @@ Calcula tu liquidación laboral y recibiras el resultado en tu correo :mailbox_w
 - :gem: Prestaciones sociales(Prima, censantias, intereses de cesantias) 
 - :surfer: Desacanso remunerado (vacaciones) 
 - :pencil2: Saldos y otros pendientes 
+
+
+### Imagenes
+![alt text](https://raw.githubusercontent.com/nancho35/LiquidaTadeo/master/src/assets/top.png)
+
+
