@@ -38,8 +38,8 @@ Calcula tu liquidación laboral y recibiras el resultado en tu correo :mailbox_w
 
 
 ### Imagenes
-<img src="https://i.imgur.com/mX0e7qU.png" width="350" />
-<img src="https://i.imgur.com/HxgBE2p.png" width="350" />
-<img src="https://i.imgur.com/hmQT1pb.png" width="350" />
-<img src="https://i.imgur.com/ZOH7wzX.png" width="350" />
-<img src="https://i.imgur.com/30GPSjs.png" width="350" />
+<img src="https://i.imgur.com/mX0e7qU.png" width="550" />
+<img src="https://i.imgur.com/HxgBE2p.png" width="550" />
+<img src="https://i.imgur.com/hmQT1pb.png" width="550" />
+<img src="https://i.imgur.com/ZOH7wzX.png" width="550" />
+<img src="https://i.imgur.com/30GPSjs.png" width="550" />
